@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python 刷题题库</title>
+<style>
+/* ====== CSS Variables ====== */
+:root {
+  --primary: #4f46e5;
+  --primary-light: #e0e7ff;
+  --primary-dark: #4338ca;
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --sidebar-width: 280px;
+  --topbar-height: 56px;
+}
+.dark {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-alt: #273548;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+  --border-light: #1e293b;
+  --shadow: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.25);
+  --primary-light: #312e81;
+}
+
+/* ====== Reset & Base ====== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+img { max-width: 100%; display: block; }
+
+/* ====== App Shell ====== */
+#app { display: flex; flex-direction: column; height: 100vh; }
+
+/* ====== Top Bar ====== */
+.topbar {
+  height: var(--topbar-height);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+}
+.topbar-brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+.topbar-brand span { color: var(--text-secondary); font-weight: 400; font-size: 0.85rem; margin-left: 4px; }
+.paper-tabs {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+  overflow-x: auto;
+}
+.paper-tab {
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.paper-tab:hover { background: var(--bg); color: var(--text); }
+.paper-tab.active { background: var(--primary); color: #fff; }
+.topbar-actions { display: flex; gap: 8px; align-items: center; }
+.topbar-stat {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.topbar-stat strong { color: var(--primary); font-size: 1rem; }
+
+/* Icon buttons */
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+.icon-btn:hover { background: var(--bg); color: var(--text); }
+.icon-btn.active { background: var(--primary-light); color: var(--primary); }
+
+/* ====== Body: sidebar + main ====== */
+.body-wrap { display: flex; flex: 1; overflow: hidden; }
+
+/* ====== Sidebar ====== */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.sidebar-section {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.sidebar-section:last-child { border-bottom: none; }
+.sidebar-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* Type filters */
+.type-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.type-chip {
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.type-chip:hover { border-color: var(--border); color: var(--text); }
+.type-chip.active { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+
+/* Question grid */
+.question-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+.q-num {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  min-width: 0;
+}
+.q-num:hover { border-color: var(--primary); color: var(--primary); }
+.q-num.current { background: var(--primary); color: #fff; border-color: var(--primary); }
+.q-num.done { background: var(--success-light); color: var(--success); border-color: var(--success); }
+.q-num.done.current { background: var(--success); color: #fff; }
+.q-num.starred { background: var(--warning-light); color: #b45309; border-color: var(--warning); }
+.q-num.starred.current { background: var(--warning); color: #fff; }
+.q-num.starred.done { background: linear-gradient(135deg, var(--success-light) 50%, var(--warning-light) 50%); }
+
+/* Type section in grid */
+.type-section { margin-bottom: 14px; }
+.type-section-header {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Progress bar */
+.progress-wrap { margin-top: 10px; }
+.progress-text { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.progress-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 0.4s ease; }
+
+/* ====== Main Content ====== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Question header */
+.q-header {
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.q-meta { display: flex; align-items: center; gap: 10px; }
+.q-badge {
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.q-idx { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* Question image area */
+.q-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+}
+.q-image-wrap {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s;
+}
+.q-image-wrap:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.q-image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.q-image-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 300px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: var(--surface-alt);
+}
+
+/* Answer section */
+.q-answer-area {
+  padding: 0 24px 16px;
+  flex-shrink: 0;
+}
+.answer-toggle-group { display: flex; gap: 8px; margin-bottom: 8px; }
+.answer-toggle {
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--surface);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  transition: all 0.2s;
+}
+.answer-toggle:hover { background: var(--primary-light); }
+.answer-toggle.revealed { background: var(--primary); color: #fff; }
+
+.answer-content {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: none;
+  margin-bottom: 8px;
+}
+.answer-content.show { display: block; animation: slideDown 0.25s ease; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.answer-line { margin-bottom: 6px; font-size: 0.9rem; }
+.answer-line:last-child { margin-bottom: 0; }
+.answer-label { font-weight: 600; color: var(--primary); }
+.answer-text { color: var(--text); }
+.answer-text.correct-ans { color: var(--success); font-weight: 600; }
+
+/* Bottom action bar */
+.action-bar {
+  padding: 10px 24px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.nav-btns { display: flex; gap: 8px; }
+.nav-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.nav-btn:hover { background: var(--border); }
+.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.nav-btn.primary { background: var(--primary); color: #fff; }
+.nav-btn.primary:hover { background: var(--primary-dark); }
+.action-btns { display: flex; gap: 8px; }
+.action-btn {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.action-btn:hover { background: var(--border); color: var(--text); }
+.action-btn.active { background: var(--warning-light); color: #b45309; }
+.action-btn.done-mark { background: var(--success-light); color: var(--success); }
+.kbd-hint { font-size: 0.7rem; color: var(--text-muted); margin-left: 2px; }
+
+/* ====== Lightbox ====== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.lightbox img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 2rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+
+/* ====== Mobile sidebar toggle ====== */
+.sidebar-toggle {
+  display: none;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  align-items: center; justify-content: center;
+}
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 199;
+}
+
+/* ====== Empty state ====== */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  gap: 12px;
+}
+.empty-state-icon { font-size: 3rem; opacity: 0.5; }
+.empty-state-text { font-size: 0.95rem; }
+
+/* ====== Scrollbar ====== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: var(--topbar-height); bottom: 0;
+    z-index: 200;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-md);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.show { display: block; }
+  .sidebar-toggle { display: flex; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .paper-tab { padding: 6px 12px; font-size: 0.8rem; }
+  .topbar-brand { font-size: 0.95rem; }
+  .topbar-brand span { display: none; }
+  .q-header { padding: 10px 14px; }
+  .q-content { padding: 12px; }
+  .q-answer-area { padding: 0 14px 12px; }
+  .action-bar { padding: 8px 14px; flex-wrap: wrap; }
+  .nav-btn { padding: 6px 12px; font-size: 0.8rem; }
+  .action-btn { padding: 6px 10px; font-size: 0.75rem; }
+  .kbd-hint { display: none; }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+  .q-image-wrap { border-radius: var(--radius-sm); }
+  .question-grid { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* ====== Settings Modal ====== */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9990;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 28px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  z-index: 9991;
+}
+.modal h3 { font-size: 1.1rem; margin-bottom: 20px; color: var(--text); }
+.modal label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; margin-top: 14px; }
+.modal label:first-of-type { margin-top: 0; }
+.modal input, .modal select {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.9rem; font-family: inherit;
+  background: var(--bg); color: var(--text);
+  transition: border-color 0.2s;
+}
+.modal input:focus, .modal select:focus { border-color: var(--primary); outline: none; }
+.modal-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+.modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
+.modal-btn {
+  padding: 8px 20px; border-radius: var(--radius-sm);
+  font-size: 0.85rem; font-weight: 500;
+  transition: all 0.2s;
+}
+.modal-btn.primary { background: var(--primary); color: #fff; }
+.modal-btn.primary:hover { background: var(--primary-dark); }
+.modal-btn.cancel { background: var(--bg); color: var(--text); }
+.modal-btn.cancel:hover { background: var(--border); }
+.modal-btn.danger { background: var(--danger); color: #fff; }
+.modal-btn.danger:hover { opacity: 0.85; }
+
+/* ====== Toast ====== */
+.toast-container {
+  position: fixed; top: 20px; right: 20px;
+  z-index: 9999; display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  padding: 12px 20px; border-radius: var(--radius-sm);
+  font-size: 0.85rem; font-weight: 500; color: #fff;
+  animation: slideIn 0.3s ease;
+  max-width: 380px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.toast.success { background: #16a34a; }
+.toast.error { background: #ef4444; }
+.toast.info { background: var(--primary); }
+@keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ====== AI Button ====== */
+.ai-btn {
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 500;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.ai-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.ai-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.ai-btn.loading { animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+.ai-answer-badge {
+  display: inline-block;
+  padding: 2px 8px; border-radius: 10px;
+  font-size: 0.7rem; font-weight: 600;
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  color: #6d28d9;
+}
+.dark .ai-answer-badge { background: linear-gradient(135deg, #4c1d95, #5b21b6); color: #c4b5fd; }
+
+.batch-ai-btn {
+  width: 100%; margin-top: 8px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 500;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.batch-ai-btn:hover { opacity: 0.9; }
+.batch-ai-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.export-btn {
+  width: 100%; margin-top: 6px;
+  padding: 7px 12px; border-radius: var(--radius-sm);
+  font-size: 0.78rem; font-weight: 500;
+  background: var(--success); color: #fff;
+  transition: all 0.2s;
+}
+.export-btn:hover { opacity: 0.85; }
+.export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.api-status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.api-status.ok { background: #16a34a; }
+.api-status.none { background: #d1d5db; }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- File protocol warning -->
+  <div id="fileWarning" style="display:none;background:#fef3c7;color:#92400e;text-align:center;padding:6px;font-size:0.8rem;font-weight:500;">
+    ⚠️ 检测到通过 file:// 打开，AI 解答功能受限。请使用
+    <a href="http://localhost:8000/Python刷题.html" style="color:#d97706;font-weight:700;">http://localhost:8000/Python刷题.html</a>
+  </div>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle" title="目录">☰</button>
+    <div class="topbar-brand">Python 刷题题库<span>| 样卷系统</span></div>
+    <nav class="paper-tabs" id="paperTabs"></nav>
+    <div class="topbar-actions">
+      <span class="topbar-stat" id="topbarStat"></span>
+      <span class="api-status none" id="apiStatus" title="API未配置"></span>
+      <button class="icon-btn" id="settingsBtn" title="API设置">⚙️</button>
+      <button class="icon-btn" id="darkToggle" title="深色模式">🌙</button>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="body-wrap">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">题型筛选</div>
+        <div class="type-filters" id="typeFilters"></div>
+      </div>
+      <div class="sidebar-section" id="questionNav" style="flex:1;overflow-y:auto;"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">进度</div>
+        <div class="progress-wrap">
+          <div class="progress-text"><span id="progressLabel">已完成</span><span id="progressPct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+        <button class="batch-ai-btn" id="batchAiBtn">🤖 批量AI解答</button>
+        <button class="export-btn" id="exportBtn" style="display:none;">📋 导出AI答案</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main" id="mainContent">
+      <!-- Rendered by JS -->
+    </main>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" style="display:none;">
+  <button class="lightbox-close">&times;</button>
+  <img src="" alt="题目大图">
+</div>
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal" style="display:none;">
+  <div class="modal">
+    <h3>⚙️ API 设置</h3>
+    <label>AI 服务商</label>
+    <select id="apiProvider">
+      <option value="deepseek">DeepSeek (推荐，超便宜)</option>
+      <option value="anthropic">Anthropic (Claude)</option>
+    </select>
+    <label>API Key</label>
+    <input type="password" id="apiKeyInput" placeholder="sk-...">
+    <div class="modal-hint">密钥仅保存在浏览器 localStorage 中，不会被上传</div>
+    <label>模型 <span id="modelLabel"></span></label>
+    <select id="apiModel">
+    </select>
+    <div class="modal-hint" id="apiCostHint"></div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" id="settingsCancel">取消</button>
+      <button class="modal-btn danger" id="settingsClearCache" style="margin-right:auto;">清空AI缓存</button>
+      <button class="modal-btn primary" id="settingsSave">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ======================================================================
+//  QUESTION BANK DATA
+//  Replace this array with real question data from images.
+//  Each entry:
+//    id       - unique number
+//    paper    - 1..5 (which exam paper)
+//    type     - 'choice' | 'fill' | 'judge' | 'debug' | 'codeFill' | 'design'
+//    number   - question number within its type in the paper
+//    image    - relative path to the question image
+//    answer   - correct answer text
+//    explanation - (optional) solution explanation
+//    answerImage - (optional) answer image path
+// ======================================================================
+const questionBank = [
+  { id:1, paper:1, type:'choice', number:1, image:'题目/IMG_20260527_111447.jpg', answer:'', explanation:'' },
+  { id:2, paper:1, type:'choice', number:2, image:'题目/IMG_20260527_111451.jpg', answer:'', explanation:'' },
+  { id:3, paper:1, type:'choice', number:3, image:'题目/IMG_20260527_111512.jpg', answer:'', explanation:'' },
+  { id:4, paper:1, type:'choice', number:4, image:'题目/IMG_20260527_111516.jpg', answer:'', explanation:'' },
+  { id:5, paper:1, type:'choice', number:5, image:'题目/IMG_20260527_111518.jpg', answer:'', explanation:'' },
+  { id:6, paper:1, type:'choice', number:6, image:'题目/IMG_20260527_111521.jpg', answer:'', explanation:'' },
+  { id:7, paper:1, type:'choice', number:7, image:'题目/IMG_20260527_111523.jpg', answer:'', explanation:'' },
+  { id:8, paper:1, type:'choice', number:8, image:'题目/IMG_20260527_111525.jpg', answer:'', explanation:'' },
+  { id:9, paper:1, type:'choice', number:9, image:'题目/IMG_20260527_111531.jpg', answer:'', explanation:'' },
+  { id:10, paper:1, type:'choice', number:10, image:'题目/IMG_20260527_111533.jpg', answer:'', explanation:'' },
+  { id:11, paper:1, type:'choice', number:11, image:'题目/IMG_20260527_111535.jpg', answer:'', explanation:'' },
+  { id:12, paper:1, type:'choice', number:12, image:'题目/IMG_20260527_111536.jpg', answer:'', explanation:'' },
+  { id:13, paper:1, type:'choice', number:13, image:'题目/IMG_20260527_111538.jpg', answer:'', explanation:'' },
+  { id:14, paper:1, type:'choice', number:14, image:'题目/IMG_20260527_111539.jpg', answer:'', explanation:'' },
+  { id:15, paper:1, type:'choice', number:15, image:'题目/IMG_20260527_111541.jpg', answer:'', explanation:'' },
+  { id:16, paper:1, type:'choice', number:16, image:'题目/IMG_20260527_111543.jpg', answer:'', explanation:'' },
+  { id:17, paper:1, type:'choice', number:17, image:'题目/IMG_20260527_111544.jpg', answer:'', explanation:'' },
+  { id:18, paper:1, type:'choice', number:18, image:'题目/IMG_20260527_111546.jpg', answer:'', explanation:'' },
+  { id:19, paper:1, type:'choice', number:19, image:'题目/IMG_20260527_111547.jpg', answer:'', explanation:'' },
+  { id:20, paper:1, type:'choice', number:20, image:'题目/IMG_20260527_111549.jpg', answer:'', explanation:'' },
+  { id:21, paper:1, type:'choice', number:21, image:'题目/IMG_20260527_111550.jpg', answer:'', explanation:'' },
+  { id:22, paper:1, type:'choice', number:22, image:'题目/IMG_20260527_111552.jpg', answer:'', explanation:'' },
+  { id:23, paper:1, type:'choice', number:23, image:'题目/IMG_20260527_111554.jpg', answer:'', explanation:'' },
+  { id:24, paper:1, type:'choice', number:24, image:'题目/IMG_20260527_111556.jpg', answer:'', explanation:'' },
+  { id:25, paper:1, type:'choice', number:25, image:'题目/IMG_20260527_111558.jpg', answer:'', explanation:'' },
+  { id:26, paper:1, type:'choice', number:26, image:'题目/IMG_20260527_111600.jpg', answer:'', explanation:'' },
+  { id:27, paper:1, type:'choice', number:27, image:'题目/IMG_20260527_111613.jpg', answer:'', explanation:'' },
+  { id:28, paper:1, type:'choice', number:28, image:'题目/IMG_20260527_111617.jpg', answer:'', explanation:'' },
+  { id:29, paper:1, type:'choice', number:29, image:'题目/IMG_20260527_111620.jpg', answer:'', explanation:'' },
+  { id:30, paper:1, type:'choice', number:30, image:'题目/IMG_20260527_111622.jpg', answer:'', explanation:'' },
+  { id:31, paper:1, type:'fill', number:1, image:'题目/IMG_20260527_111625.jpg', answer:'', explanation:'' },
+  { id:32, paper:1, type:'fill', number:2, image:'题目/IMG_20260527_111627.jpg', answer:'', explanation:'' },
+  { id:33, paper:1, type:'fill', number:3, image:'题目/IMG_20260527_111635.jpg', answer:'', explanation:'' },
+  { id:34, paper:1, type:'fill', number:4, image:'题目/IMG_20260527_111637.jpg', answer:'', explanation:'' },
+  { id:35, paper:1, type:'fill', number:5, image:'题目/IMG_20260527_111638.jpg', answer:'', explanation:'' },
+  { id:36, paper:1, type:'fill', number:6, image:'题目/IMG_20260527_111641.jpg', answer:'', explanation:'' },
+  { id:37, paper:1, type:'fill', number:7, image:'题目/IMG_20260527_111643.jpg', answer:'', explanation:'' },
+  { id:38, paper:1, type:'fill', number:8, image:'题目/IMG_20260527_111644.jpg', answer:'', explanation:'' },
+  { id:39, paper:1, type:'fill', number:9, image:'题目/IMG_20260527_111646.jpg', answer:'', explanation:'' },
+  { id:40, paper:1, type:'fill', number:10, image:'题目/IMG_20260527_111647.jpg', answer:'', explanation:'' },
+  { id:41, paper:1, type:'judge', number:1, image:'题目/IMG_20260527_111651.jpg', answer:'', explanation:'' },
+  { id:42, paper:1, type:'judge', number:2, image:'题目/IMG_20260527_111653.jpg', answer:'', explanation:'' },
+  { id:43, paper:1, type:'judge', number:3, image:'题目/IMG_20260527_111657.jpg', answer:'', explanation:'' },
+  { id:44, paper:1, type:'judge', number:4, image:'题目/IMG_20260527_111705.jpg', answer:'', explanation:'' },
+  { id:45, paper:1, type:'judge', number:5, image:'题目/IMG_20260527_111718.jpg', answer:'', explanation:'' },
+  { id:46, paper:1, type:'judge', number:6, image:'题目/IMG_20260527_111722.jpg', answer:'', explanation:'' },
+  { id:47, paper:1, type:'judge', number:7, image:'题目/IMG_20260527_111724.jpg', answer:'', explanation:'' },
+  { id:48, paper:1, type:'judge', number:8, image:'题目/IMG_20260527_111725.jpg', answer:'', explanation:'' },
+  { id:49, paper:1, type:'judge', number:9, image:'题目/IMG_20260527_111729.jpg', answer:'', explanation:'' },
+  { id:50, paper:1, type:'judge', number:10, image:'题目/IMG_20260527_111739.jpg', answer:'', explanation:'' },
+  { id:51, paper:1, type:'judge', number:11, image:'题目/IMG_20260527_111741.jpg', answer:'', explanation:'' },
+  { id:52, paper:1, type:'judge', number:12, image:'题目/IMG_20260527_111743.jpg', answer:'', explanation:'' },
+  { id:53, paper:1, type:'judge', number:13, image:'题目/IMG_20260527_111744.jpg', answer:'', explanation:'' },
+  { id:54, paper:1, type:'judge', number:14, image:'题目/IMG_20260527_111746.jpg', answer:'', explanation:'' },
+  { id:55, paper:1, type:'judge', number:15, image:'题目/IMG_20260527_111748.jpg', answer:'', explanation:'' },
+  { id:56, paper:1, type:'codeFill', number:1, image:'题目/IMG_20260527_111850.jpg', answer:'', explanation:'' },
+  { id:57, paper:1, type:'debug', number:1, image:'题目/IMG_20260527_111919.jpg', answer:'', explanation:'' },
+  { id:58, paper:1, type:'design', number:1, image:'题目/IMG_20260527_111942.jpg', answer:'', explanation:'' },
+  { id:59, paper:1, type:'design', number:2, image:'题目/IMG_20260527_112016.jpg', answer:'', explanation:'' },
+  { id:60, paper:2, type:'choice', number:1, image:'题目/IMG_20260527_112201.jpg', answer:'', explanation:'' },
+  { id:61, paper:2, type:'choice', number:2, image:'题目/IMG_20260527_112202.jpg', answer:'', explanation:'' },
+  { id:62, paper:2, type:'choice', number:3, image:'题目/IMG_20260527_112203.jpg', answer:'', explanation:'' },
+  { id:63, paper:2, type:'choice', number:4, image:'题目/IMG_20260527_112205.jpg', answer:'', explanation:'' },
+  { id:64, paper:2, type:'choice', number:5, image:'题目/IMG_20260527_112206.jpg', answer:'', explanation:'' },
+  { id:65, paper:2, type:'choice', number:6, image:'题目/IMG_20260527_112208.jpg', answer:'', explanation:'' },
+  { id:66, paper:2, type:'choice', number:7, image:'题目/IMG_20260527_112209.jpg', answer:'', explanation:'' },
+  { id:67, paper:2, type:'choice', number:8, image:'题目/IMG_20260527_112211.jpg', answer:'', explanation:'' },
+  { id:68, paper:2, type:'choice', number:9, image:'题目/IMG_20260527_112212.jpg', answer:'', explanation:'' },
+  { id:69, paper:2, type:'choice', number:10, image:'题目/IMG_20260527_112213.jpg', answer:'', explanation:'' },
+  { id:70, paper:2, type:'choice', number:11, image:'题目/IMG_20260527_112215.jpg', answer:'', explanation:'' },
+  { id:71, paper:2, type:'choice', number:12, image:'题目/IMG_20260527_112217.jpg', answer:'', explanation:'' },
+  { id:72, paper:2, type:'choice', number:13, image:'题目/IMG_20260527_112218.jpg', answer:'', explanation:'' },
+  { id:73, paper:2, type:'choice', number:14, image:'题目/IMG_20260527_112241.jpg', answer:'', explanation:'' },
+  { id:74, paper:2, type:'choice', number:15, image:'题目/IMG_20260527_112250.jpg', answer:'', explanation:'' },
+  { id:75, paper:2, type:'choice', number:16, image:'题目/IMG_20260527_112252.jpg', answer:'', explanation:'' },
+  { id:76, paper:2, type:'choice', number:17, image:'题目/IMG_20260527_112300.jpg', answer:'', explanation:'' },
+  { id:77, paper:2, type:'choice', number:18, image:'题目/IMG_20260527_112309.jpg', answer:'', explanation:'' },
+  { id:78, paper:2, type:'choice', number:19, image:'题目/IMG_20260527_112314.jpg', answer:'', explanation:'' },
+  { id:79, paper:2, type:'choice', number:20, image:'题目/IMG_20260527_112317.jpg', answer:'', explanation:'' },
+  { id:80, paper:2, type:'choice', number:21, image:'题目/IMG_20260527_112319.jpg', answer:'', explanation:'' },
+  { id:81, paper:2, type:'choice', number:22, image:'题目/IMG_20260527_112320.jpg', answer:'', explanation:'' },
+  { id:82, paper:2, type:'choice', number:23, image:'题目/IMG_20260527_112322.jpg', answer:'', explanation:'' },
+  { id:83, paper:2, type:'choice', number:24, image:'题目/IMG_20260527_112323.jpg', answer:'', explanation:'' },
+  { id:84, paper:2, type:'choice', number:25, image:'题目/IMG_20260527_112324.jpg', answer:'', explanation:'' },
+  { id:85, paper:2, type:'choice', number:26, image:'题目/IMG_20260527_112325.jpg', answer:'', explanation:'' },
+  { id:86, paper:2, type:'choice', number:27, image:'题目/IMG_20260527_112327.jpg', answer:'', explanation:'' },
+  { id:87, paper:2, type:'choice', number:28, image:'题目/IMG_20260527_112328.jpg', answer:'', explanation:'' },
+  { id:88, paper:2, type:'choice', number:29, image:'题目/IMG_20260527_112333.jpg', answer:'', explanation:'' },
+  { id:89, paper:2, type:'choice', number:30, image:'题目/IMG_20260527_112400.jpg', answer:'', explanation:'' },
+  { id:90, paper:2, type:'fill', number:1, image:'题目/IMG_20260527_112405.jpg', answer:'', explanation:'' },
+  { id:91, paper:2, type:'fill', number:2, image:'题目/IMG_20260527_112407.jpg', answer:'', explanation:'' },
+  { id:92, paper:2, type:'fill', number:3, image:'题目/IMG_20260527_112409.jpg', answer:'', explanation:'' },
+  { id:93, paper:2, type:'fill', number:4, image:'题目/IMG_20260527_112410.jpg', answer:'', explanation:'' },
+  { id:94, paper:2, type:'fill', number:5, image:'题目/IMG_20260527_112411.jpg', answer:'', explanation:'' },
+  { id:95, paper:2, type:'fill', number:6, image:'题目/IMG_20260527_112413.jpg', answer:'', explanation:'' },
+  { id:96, paper:2, type:'fill', number:7, image:'题目/IMG_20260527_112414.jpg', answer:'', explanation:'' },
+  { id:97, paper:2, type:'fill', number:8, image:'题目/IMG_20260527_112415.jpg', answer:'', explanation:'' },
+  { id:98, paper:2, type:'fill', number:9, image:'题目/IMG_20260527_112416.jpg', answer:'', explanation:'' },
+  { id:99, paper:2, type:'fill', number:10, image:'题目/IMG_20260527_112417.jpg', answer:'', explanation:'' },
+  { id:100, paper:2, type:'judge', number:1, image:'题目/IMG_20260527_112420.jpg', answer:'', explanation:'' },
+  { id:101, paper:2, type:'judge', number:2, image:'题目/IMG_20260527_112422.jpg', answer:'', explanation:'' },
+  { id:102, paper:2, type:'judge', number:3, image:'题目/IMG_20260527_112422_2.jpg', answer:'', explanation:'' },
+  { id:103, paper:2, type:'judge', number:4, image:'题目/IMG_20260527_112423_1.jpg', answer:'', explanation:'' },
+  { id:104, paper:2, type:'judge', number:5, image:'题目/IMG_20260527_112424.jpg', answer:'', explanation:'' },
+  { id:105, paper:2, type:'judge', number:6, image:'题目/IMG_20260527_112425.jpg', answer:'', explanation:'' },
+  { id:106, paper:2, type:'judge', number:7, image:'题目/IMG_20260527_112426.jpg', answer:'', explanation:'' },
+  { id:107, paper:2, type:'judge', number:8, image:'题目/IMG_20260527_112426_2.jpg', answer:'', explanation:'' },
+  { id:108, paper:2, type:'judge', number:9, image:'题目/IMG_20260527_112428.jpg', answer:'', explanation:'' },
+  { id:109, paper:2, type:'judge', number:10, image:'题目/IMG_20260527_112429.jpg', answer:'', explanation:'' },
+  { id:110, paper:2, type:'judge', number:11, image:'题目/IMG_20260527_112430.jpg', answer:'', explanation:'' },
+  { id:111, paper:2, type:'judge', number:12, image:'题目/IMG_20260527_112432.jpg', answer:'', explanation:'' },
+  { id:112, paper:2, type:'judge', number:13, image:'题目/IMG_20260527_112433.jpg', answer:'', explanation:'' },
+  { id:113, paper:2, type:'judge', number:14, image:'题目/IMG_20260527_112435.jpg', answer:'', explanation:'' },
+  { id:114, paper:2, type:'judge', number:15, image:'题目/IMG_20260527_112436.jpg', answer:'', explanation:'' },
+  { id:115, paper:2, type:'codeFill', number:1, image:'题目/IMG_20260527_112451.jpg', answer:'', explanation:'' },
+  { id:116, paper:2, type:'debug', number:1, image:'题目/IMG_20260527_112512.jpg', answer:'', explanation:'' },
+  { id:117, paper:2, type:'design', number:1, image:'题目/IMG_20260527_112531.jpg', answer:'', explanation:'' },
+  { id:118, paper:2, type:'design', number:2, image:'题目/IMG_20260527_112548.jpg', answer:'', explanation:'' },
+  { id:119, paper:3, type:'choice', number:1, image:'题目/IMG_20260527_112704.jpg', answer:'', explanation:'' },
+  { id:120, paper:3, type:'choice', number:2, image:'题目/IMG_20260527_112709.jpg', answer:'', explanation:'' },
+  { id:121, paper:3, type:'choice', number:3, image:'题目/IMG_20260527_112710.jpg', answer:'', explanation:'' },
+  { id:122, paper:3, type:'choice', number:4, image:'题目/IMG_20260527_112711.jpg', answer:'', explanation:'' },
+  { id:123, paper:3, type:'choice', number:5, image:'题目/IMG_20260527_112712.jpg', answer:'', explanation:'' },
+  { id:124, paper:3, type:'choice', number:6, image:'题目/IMG_20260527_112713.jpg', answer:'', explanation:'' },
+  { id:125, paper:3, type:'choice', number:7, image:'题目/IMG_20260527_112714.jpg', answer:'', explanation:'' },
+  { id:126, paper:3, type:'choice', number:8, image:'题目/IMG_20260527_112715.jpg', answer:'', explanation:'' },
+  { id:127, paper:3, type:'choice', number:9, image:'题目/IMG_20260527_112715_2.jpg', answer:'', explanation:'' },
+  { id:128, paper:3, type:'choice', number:10, image:'题目/IMG_20260527_112721.jpg', answer:'', explanation:'' },
+  { id:129, paper:3, type:'choice', number:11, image:'题目/IMG_20260527_112728.jpg', answer:'', explanation:'' },
+  { id:130, paper:3, type:'choice', number:12, image:'题目/IMG_20260527_112729.jpg', answer:'', explanation:'' },
+  { id:131, paper:3, type:'choice', number:13, image:'题目/IMG_20260527_112735.jpg', answer:'', explanation:'' },
+  { id:132, paper:3, type:'choice', number:14, image:'题目/IMG_20260527_112742.jpg', answer:'', explanation:'' },
+  { id:133, paper:3, type:'choice', number:15, image:'题目/IMG_20260527_112747.jpg', answer:'', explanation:'' },
+  { id:134, paper:3, type:'choice', number:16, image:'题目/IMG_20260527_112752.jpg', answer:'', explanation:'' },
+  { id:135, paper:3, type:'choice', number:17, image:'题目/IMG_20260527_112800.jpg', answer:'', explanation:'' },
+  { id:136, paper:3, type:'choice', number:18, image:'题目/IMG_20260527_112805.jpg', answer:'', explanation:'' },
+  { id:137, paper:3, type:'choice', number:19, image:'题目/IMG_20260527_112806.jpg', answer:'', explanation:'' },
+  { id:138, paper:3, type:'choice', number:20, image:'题目/IMG_20260527_112807.jpg', answer:'', explanation:'' },
+  { id:139, paper:3, type:'choice', number:21, image:'题目/IMG_20260527_112812.jpg', answer:'', explanation:'' },
+  { id:140, paper:3, type:'choice', number:22, image:'题目/IMG_20260527_112816.jpg', answer:'', explanation:'' },
+  { id:141, paper:3, type:'choice', number:23, image:'题目/IMG_20260527_112821.jpg', answer:'', explanation:'' },
+  { id:142, paper:3, type:'choice', number:24, image:'题目/IMG_20260527_112827.jpg', answer:'', explanation:'' },
+  { id:143, paper:3, type:'choice', number:25, image:'题目/IMG_20260527_112831.jpg', answer:'', explanation:'' },
+  { id:144, paper:3, type:'choice', number:26, image:'题目/IMG_20260527_112832.jpg', answer:'', explanation:'' },
+  { id:145, paper:3, type:'choice', number:27, image:'题目/IMG_20260527_112838.jpg', answer:'', explanation:'' },
+  { id:146, paper:3, type:'choice', number:28, image:'题目/IMG_20260527_112851.jpg', answer:'', explanation:'' },
+  { id:147, paper:3, type:'choice', number:29, image:'题目/IMG_20260527_112855.jpg', answer:'', explanation:'' },
+  { id:148, paper:3, type:'choice', number:30, image:'题目/IMG_20260527_112901.jpg', answer:'', explanation:'' },
+  { id:149, paper:3, type:'fill', number:1, image:'题目/IMG_20260527_112903.jpg', answer:'', explanation:'' },
+  { id:150, paper:3, type:'fill', number:2, image:'题目/IMG_20260527_112904.jpg', answer:'', explanation:'' },
+  { id:151, paper:3, type:'fill', number:3, image:'题目/IMG_20260527_112905.jpg', answer:'', explanation:'' },
+  { id:152, paper:3, type:'fill', number:4, image:'题目/IMG_20260527_112906.jpg', answer:'', explanation:'' },
+  { id:153, paper:3, type:'fill', number:5, image:'题目/IMG_20260527_112906_2.jpg', answer:'', explanation:'' },
+  { id:154, paper:3, type:'fill', number:6, image:'题目/IMG_20260527_112907_1.jpg', answer:'', explanation:'' },
+  { id:155, paper:3, type:'fill', number:7, image:'题目/IMG_20260527_112908.jpg', answer:'', explanation:'' },
+  { id:156, paper:3, type:'fill', number:8, image:'题目/IMG_20260527_112909_1.jpg', answer:'', explanation:'' },
+  { id:157, paper:3, type:'fill', number:9, image:'题目/IMG_20260527_112910_1.jpg', answer:'', explanation:'' },
+  { id:158, paper:3, type:'fill', number:10, image:'题目/IMG_20260527_112911_1.jpg', answer:'', explanation:'' },
+  { id:159, paper:3, type:'judge', number:1, image:'题目/IMG_20260527_112915.jpg', answer:'', explanation:'' },
+  { id:160, paper:3, type:'judge', number:2, image:'题目/IMG_20260527_112916.jpg', answer:'', explanation:'' },
+  { id:161, paper:3, type:'judge', number:3, image:'题目/IMG_20260527_112916_2.jpg', answer:'', explanation:'' },
+  { id:162, paper:3, type:'judge', number:4, image:'题目/IMG_20260527_112917_1.jpg', answer:'', explanation:'' },
+  { id:163, paper:3, type:'judge', number:5, image:'题目/IMG_20260527_112918_1.jpg', answer:'', explanation:'' },
+  { id:164, paper:3, type:'judge', number:6, image:'题目/IMG_20260527_112919_1.jpg', answer:'', explanation:'' },
+  { id:165, paper:3, type:'judge', number:7, image:'题目/IMG_20260527_112920.jpg', answer:'', explanation:'' },
+  { id:166, paper:3, type:'judge', number:8, image:'题目/IMG_20260527_112921.jpg', answer:'', explanation:'' },
+  { id:167, paper:3, type:'judge', number:9, image:'题目/IMG_20260527_112922.jpg', answer:'', explanation:'' },
+  { id:168, paper:3, type:'judge', number:10, image:'题目/IMG_20260527_112941.jpg', answer:'', explanation:'' },
+  { id:169, paper:3, type:'judge', number:11, image:'题目/IMG_20260527_112956.jpg', answer:'', explanation:'' },
+  { id:170, paper:3, type:'judge', number:12, image:'题目/IMG_20260527_112959.jpg', answer:'', explanation:'' },
+  { id:171, paper:3, type:'judge', number:13, image:'题目/IMG_20260527_113000.jpg', answer:'', explanation:'' },
+  { id:172, paper:3, type:'judge', number:14, image:'题目/IMG_20260527_113001.jpg', answer:'', explanation:'' },
+  { id:173, paper:3, type:'judge', number:15, image:'题目/IMG_20260527_113002.jpg', answer:'', explanation:'' },
+  { id:174, paper:3, type:'codeFill', number:1, image:'题目/IMG_20260527_113015.jpg', answer:'', explanation:'' },
+  { id:175, paper:3, type:'debug', number:1, image:'题目/IMG_20260527_113033.jpg', answer:'', explanation:'' },
+  { id:176, paper:3, type:'design', number:1, image:'题目/IMG_20260527_113057.jpg', answer:'', explanation:'' },
+  { id:177, paper:3, type:'design', number:2, image:'题目/IMG_20260527_113134.jpg', answer:'', explanation:'' },
+  { id:178, paper:4, type:'choice', number:1, image:'题目/IMG_20260527_113338.jpg', answer:'', explanation:'' },
+  { id:179, paper:4, type:'choice', number:2, image:'题目/IMG_20260527_113339.jpg', answer:'', explanation:'' },
+  { id:180, paper:4, type:'choice', number:3, image:'题目/IMG_20260527_113340.jpg', answer:'', explanation:'' },
+  { id:181, paper:4, type:'choice', number:4, image:'题目/IMG_20260527_113340_2.jpg', answer:'', explanation:'' },
+  { id:182, paper:4, type:'choice', number:5, image:'题目/IMG_20260527_113341_1.jpg', answer:'', explanation:'' },
+  { id:183, paper:4, type:'choice', number:6, image:'题目/IMG_20260527_113342_1.jpg', answer:'', explanation:'' },
+  { id:184, paper:4, type:'choice', number:7, image:'题目/IMG_20260527_113343.jpg', answer:'', explanation:'' },
+  { id:185, paper:4, type:'choice', number:8, image:'题目/IMG_20260527_113344.jpg', answer:'', explanation:'' },
+  { id:186, paper:4, type:'choice', number:9, image:'题目/IMG_20260527_113358.jpg', answer:'', explanation:'' },
+  { id:187, paper:4, type:'choice', number:10, image:'题目/IMG_20260527_113401.jpg', answer:'', explanation:'' },
+  { id:188, paper:4, type:'choice', number:11, image:'题目/IMG_20260527_113402.jpg', answer:'', explanation:'' },
+  { id:189, paper:4, type:'choice', number:12, image:'题目/IMG_20260527_113414.jpg', answer:'', explanation:'' },
+  { id:190, paper:4, type:'choice', number:13, image:'题目/IMG_20260527_113423.jpg', answer:'', explanation:'' },
+  { id:191, paper:4, type:'choice', number:14, image:'题目/IMG_20260527_113432.jpg', answer:'', explanation:'' },
+  { id:192, paper:4, type:'choice', number:15, image:'题目/IMG_20260527_113440.jpg', answer:'', explanation:'' },
+  { id:193, paper:4, type:'choice', number:16, image:'题目/IMG_20260527_113441.jpg', answer:'', explanation:'' },
+  { id:194, paper:4, type:'choice', number:17, image:'题目/IMG_20260527_113442.jpg', answer:'', explanation:'' },
+  { id:195, paper:4, type:'choice', number:18, image:'题目/IMG_20260527_113443.jpg', answer:'', explanation:'' },
+  { id:196, paper:4, type:'choice', number:19, image:'题目/IMG_20260527_113445.jpg', answer:'', explanation:'' },
+  { id:197, paper:4, type:'choice', number:20, image:'题目/IMG_20260527_113447.jpg', answer:'', explanation:'' },
+  { id:198, paper:4, type:'choice', number:21, image:'题目/IMG_20260527_113511.jpg', answer:'', explanation:'' },
+  { id:199, paper:4, type:'choice', number:22, image:'题目/IMG_20260527_113514.jpg', answer:'', explanation:'' },
+  { id:200, paper:4, type:'choice', number:23, image:'题目/IMG_20260527_113520.jpg', answer:'', explanation:'' },
+  { id:201, paper:4, type:'choice', number:24, image:'题目/IMG_20260527_113527.jpg', answer:'', explanation:'' },
+  { id:202, paper:4, type:'choice', number:25, image:'题目/IMG_20260527_113527_2.jpg', answer:'', explanation:'' },
+  { id:203, paper:4, type:'choice', number:26, image:'题目/IMG_20260527_113529.jpg', answer:'', explanation:'' },
+  { id:204, paper:4, type:'choice', number:27, image:'题目/IMG_20260527_113544.jpg', answer:'', explanation:'' },
+  { id:205, paper:4, type:'choice', number:28, image:'题目/IMG_20260527_113547.jpg', answer:'', explanation:'' },
+  { id:206, paper:4, type:'choice', number:29, image:'题目/IMG_20260527_113548.jpg', answer:'', explanation:'' },
+  { id:207, paper:4, type:'choice', number:30, image:'题目/IMG_20260527_113549.jpg', answer:'', explanation:'' },
+  { id:208, paper:4, type:'fill', number:1, image:'题目/IMG_20260527_113550.jpg', answer:'', explanation:'' },
+  { id:209, paper:4, type:'fill', number:2, image:'题目/IMG_20260527_113552.jpg', answer:'', explanation:'' },
+  { id:210, paper:4, type:'fill', number:3, image:'题目/IMG_20260527_113553.jpg', answer:'', explanation:'' },
+  { id:211, paper:4, type:'fill', number:4, image:'题目/IMG_20260527_113554.jpg', answer:'', explanation:'' },
+  { id:212, paper:4, type:'fill', number:5, image:'题目/IMG_20260527_113555.jpg', answer:'', explanation:'' },
+  { id:213, paper:4, type:'fill', number:6, image:'题目/IMG_20260527_113556.jpg', answer:'', explanation:'' },
+  { id:214, paper:4, type:'fill', number:7, image:'题目/IMG_20260527_113557.jpg', answer:'', explanation:'' },
+  { id:215, paper:4, type:'fill', number:8, image:'题目/IMG_20260527_113558.jpg', answer:'', explanation:'' },
+  { id:216, paper:4, type:'fill', number:9, image:'题目/IMG_20260527_113559.jpg', answer:'', explanation:'' },
+  { id:217, paper:4, type:'fill', number:10, image:'题目/IMG_20260527_113559_2.jpg', answer:'', explanation:'' },
+  { id:218, paper:4, type:'judge', number:1, image:'题目/IMG_20260527_113601.jpg', answer:'', explanation:'' },
+  { id:219, paper:4, type:'judge', number:2, image:'题目/IMG_20260527_113603.jpg', answer:'', explanation:'' },
+  { id:220, paper:4, type:'judge', number:3, image:'题目/IMG_20260527_113604.jpg', answer:'', explanation:'' },
+  { id:221, paper:4, type:'judge', number:4, image:'题目/IMG_20260527_113612.jpg', answer:'', explanation:'' },
+  { id:222, paper:4, type:'judge', number:5, image:'题目/IMG_20260527_113613.jpg', answer:'', explanation:'' },
+  { id:223, paper:4, type:'judge', number:6, image:'题目/IMG_20260527_113614.jpg', answer:'', explanation:'' },
+  { id:224, paper:4, type:'judge', number:7, image:'题目/IMG_20260527_113615.jpg', answer:'', explanation:'' },
+  { id:225, paper:4, type:'judge', number:8, image:'题目/IMG_20260527_113616.jpg', answer:'', explanation:'' },
+  { id:226, paper:4, type:'judge', number:9, image:'题目/IMG_20260527_113617.jpg', answer:'', explanation:'' },
+  { id:227, paper:4, type:'judge', number:10, image:'题目/IMG_20260527_113618.jpg', answer:'', explanation:'' },
+  { id:228, paper:4, type:'judge', number:11, image:'题目/IMG_20260527_113619.jpg', answer:'', explanation:'' },
+  { id:229, paper:4, type:'judge', number:12, image:'题目/IMG_20260527_113620.jpg', answer:'', explanation:'' },
+  { id:230, paper:4, type:'judge', number:13, image:'题目/IMG_20260527_113632.jpg', answer:'', explanation:'' },
+  { id:231, paper:4, type:'judge', number:14, image:'题目/IMG_20260527_113635.jpg', answer:'', explanation:'' },
+  { id:232, paper:4, type:'judge', number:15, image:'题目/IMG_20260527_113636.jpg', answer:'', explanation:'' },
+  { id:233, paper:4, type:'codeFill', number:1, image:'题目/IMG_20260527_113651.jpg', answer:'', explanation:'' },
+  { id:234, paper:4, type:'debug', number:1, image:'题目/IMG_20260527_113707.jpg', answer:'', explanation:'' },
+  { id:235, paper:4, type:'design', number:1, image:'题目/IMG_20260527_113727.jpg', answer:'', explanation:'' },
+  { id:236, paper:4, type:'design', number:2, image:'题目/IMG_20260527_113741.jpg', answer:'', explanation:'' },
+  { id:237, paper:5, type:'choice', number:1, image:'题目/IMG_20260527_113925.jpg', answer:'', explanation:'' },
+  { id:238, paper:5, type:'choice', number:2, image:'题目/IMG_20260527_113927.jpg', answer:'', explanation:'' },
+  { id:239, paper:5, type:'choice', number:3, image:'题目/IMG_20260527_113928.jpg', answer:'', explanation:'' },
+  { id:240, paper:5, type:'choice', number:4, image:'题目/IMG_20260527_113929.jpg', answer:'', explanation:'' },
+  { id:241, paper:5, type:'choice', number:5, image:'题目/IMG_20260527_113930.jpg', answer:'', explanation:'' },
+  { id:242, paper:5, type:'choice', number:6, image:'题目/IMG_20260527_113930_2.jpg', answer:'', explanation:'' },
+  { id:243, paper:5, type:'choice', number:7, image:'题目/IMG_20260527_113931.jpg', answer:'', explanation:'' },
+  { id:244, paper:5, type:'choice', number:8, image:'题目/IMG_20260527_113932.jpg', answer:'', explanation:'' },
+  { id:245, paper:5, type:'choice', number:9, image:'题目/IMG_20260527_113933.jpg', answer:'', explanation:'' },
+  { id:246, paper:5, type:'choice', number:10, image:'题目/IMG_20260527_113946.jpg', answer:'', explanation:'' },
+  { id:247, paper:5, type:'choice', number:11, image:'题目/IMG_20260527_113957.jpg', answer:'', explanation:'' },
+  { id:248, paper:5, type:'choice', number:12, image:'题目/IMG_20260527_113959.jpg', answer:'', explanation:'' },
+  { id:249, paper:5, type:'choice', number:13, image:'题目/IMG_20260527_114005.jpg', answer:'', explanation:'' },
+  { id:250, paper:5, type:'choice', number:14, image:'题目/IMG_20260527_114007.jpg', answer:'', explanation:'' },
+  { id:251, paper:5, type:'choice', number:15, image:'题目/IMG_20260527_114008_1.jpg', answer:'', explanation:'' },
+  { id:252, paper:5, type:'choice', number:16, image:'题目/IMG_20260527_114009.jpg', answer:'', explanation:'' },
+  { id:253, paper:5, type:'choice', number:17, image:'题目/IMG_20260527_114013.jpg', answer:'', explanation:'' },
+  { id:254, paper:5, type:'choice', number:18, image:'题目/IMG_20260527_114017.jpg', answer:'', explanation:'' },
+  { id:255, paper:5, type:'choice', number:19, image:'题目/IMG_20260527_114020.jpg', answer:'', explanation:'' },
+  { id:256, paper:5, type:'choice', number:20, image:'题目/IMG_20260527_114021.jpg', answer:'', explanation:'' },
+  { id:257, paper:5, type:'choice', number:21, image:'题目/IMG_20260527_114025.jpg', answer:'', explanation:'' },
+  { id:258, paper:5, type:'choice', number:22, image:'题目/IMG_20260527_114029.jpg', answer:'', explanation:'' },
+  { id:259, paper:5, type:'choice', number:23, image:'题目/IMG_20260527_114032.jpg', answer:'', explanation:'' },
+  { id:260, paper:5, type:'choice', number:24, image:'题目/IMG_20260527_114033_1.jpg', answer:'', explanation:'' },
+  { id:261, paper:5, type:'choice', number:25, image:'题目/IMG_20260527_114037.jpg', answer:'', explanation:'' },
+  { id:262, paper:5, type:'choice', number:26, image:'题目/IMG_20260527_114038.jpg', answer:'', explanation:'' },
+  { id:263, paper:5, type:'choice', number:27, image:'题目/IMG_20260527_114044.jpg', answer:'', explanation:'' },
+  { id:264, paper:5, type:'choice', number:28, image:'题目/IMG_20260527_114046.jpg', answer:'', explanation:'' },
+  { id:265, paper:5, type:'choice', number:29, image:'题目/IMG_20260527_114047.jpg', answer:'', explanation:'' },
+  { id:266, paper:5, type:'choice', number:30, image:'题目/IMG_20260527_114056.jpg', answer:'', explanation:'' },
+  { id:267, paper:5, type:'fill', number:1, image:'题目/IMG_20260527_114058.jpg', answer:'', explanation:'' },
+  { id:268, paper:5, type:'fill', number:2, image:'题目/IMG_20260527_114059.jpg', answer:'', explanation:'' },
+  { id:269, paper:5, type:'fill', number:3, image:'题目/IMG_20260527_114100.jpg', answer:'', explanation:'' },
+  { id:270, paper:5, type:'fill', number:4, image:'题目/IMG_20260527_114100_2.jpg', answer:'', explanation:'' },
+  { id:271, paper:5, type:'fill', number:5, image:'题目/IMG_20260527_114101.jpg', answer:'', explanation:'' },
+  { id:272, paper:5, type:'fill', number:6, image:'题目/IMG_20260527_114102_1.jpg', answer:'', explanation:'' },
+  { id:273, paper:5, type:'fill', number:7, image:'题目/IMG_20260527_114103.jpg', answer:'', explanation:'' },
+  { id:274, paper:5, type:'fill', number:8, image:'题目/IMG_20260527_114104.jpg', answer:'', explanation:'' },
+  { id:275, paper:5, type:'fill', number:9, image:'题目/IMG_20260527_114105.jpg', answer:'', explanation:'' },
+  { id:276, paper:5, type:'fill', number:10, image:'题目/IMG_20260527_114105_2.jpg', answer:'', explanation:'' },
+  { id:277, paper:5, type:'judge', number:1, image:'题目/IMG_20260527_114106.jpg', answer:'', explanation:'' },
+  { id:278, paper:5, type:'judge', number:2, image:'题目/IMG_20260527_114107.jpg', answer:'', explanation:'' },
+  { id:279, paper:5, type:'judge', number:3, image:'题目/IMG_20260527_114108.jpg', answer:'', explanation:'' },
+  { id:280, paper:5, type:'judge', number:4, image:'题目/IMG_20260527_114109.jpg', answer:'', explanation:'' },
+  { id:281, paper:5, type:'judge', number:5, image:'题目/IMG_20260527_114110.jpg', answer:'', explanation:'' },
+  { id:282, paper:5, type:'judge', number:6, image:'题目/IMG_20260527_114110_2.jpg', answer:'', explanation:'' },
+  { id:283, paper:5, type:'judge', number:7, image:'题目/IMG_20260527_114111.jpg', answer:'', explanation:'' },
+  { id:284, paper:5, type:'judge', number:8, image:'题目/IMG_20260527_114112.jpg', answer:'', explanation:'' },
+  { id:285, paper:5, type:'judge', number:9, image:'题目/IMG_20260527_114113.jpg', answer:'', explanation:'' },
+  { id:286, paper:5, type:'judge', number:10, image:'题目/IMG_20260527_114125.jpg', answer:'', explanation:'' },
+  { id:287, paper:5, type:'judge', number:11, image:'题目/IMG_20260527_114129.jpg', answer:'', explanation:'' },
+  { id:288, paper:5, type:'judge', number:12, image:'题目/IMG_20260527_114130.jpg', answer:'', explanation:'' },
+  { id:289, paper:5, type:'judge', number:13, image:'题目/IMG_20260527_114131.jpg', answer:'', explanation:'' },
+  { id:290, paper:5, type:'judge', number:14, image:'题目/IMG_20260527_114140.jpg', answer:'', explanation:'' },
+  { id:291, paper:5, type:'judge', number:15, image:'题目/IMG_20260527_114144.jpg', answer:'', explanation:'' },
+  { id:292, paper:5, type:'codeFill', number:1, image:'题目/IMG_20260527_114156.jpg', answer:'', explanation:'' },
+  { id:293, paper:5, type:'debug', number:1, image:'题目/IMG_20260527_114218.jpg', answer:'', explanation:'' },
+  { id:294, paper:5, type:'design', number:1, image:'题目/IMG_20260527_114236.jpg', answer:'', explanation:'' },
+  { id:295, paper:5, type:'design', number:2, image:'题目/IMG_20260527_114255.jpg', answer:'', explanation:'' }
+];
+
+// ======================================================================
+//  TYPE CONFIG
+// ======================================================================
+const TYPE_CONFIG = {
+  choice:    { name:'选择题',   icon:'📋', order:1 },
+  fill:      { name:'填空题',   icon:'✏️',  order:2 },
+  judge:     { name:'判断题',   icon:'⚖️',  order:3 },
+  debug:     { name:'程序改错', icon:'🔧', order:4 },
+  codeFill:  { name:'程序填空', icon:'🧩', order:5 },
+  design:    { name:'程序设计', icon:'💻', order:6 },
+};
+
+// ======================================================================
+//  STATE
+// ======================================================================
+const STATE = {
+  currentPaper: 0,       // 0 = all papers
+  activeTypes: new Set(), // empty = all types
+  currentIndex: 0,
+  isDark: false,
+  answerRevealed: false,
+};
+
+// Load persisted state
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('python_quiz_state') || 'null');
+    if (saved) {
+      STATE.currentPaper = saved.currentPaper || 0;
+      STATE.currentIndex = saved.currentIndex || 0;
+    }
+  } catch(e) { /* ignore */ }
+  // Always load dark mode
+  STATE.isDark = localStorage.getItem('python_quiz_dark') === '1';
+}
+loadState();
+
+// Persisted per-question data: { id -> { done:bool, starred:bool } }
+let questionMeta = {};
+function loadMeta() {
+  try {
+    questionMeta = JSON.parse(localStorage.getItem('python_quiz_meta') || '{}');
+  } catch(e) { questionMeta = {}; }
+}
+loadMeta();
+
+function saveMeta() {
+  localStorage.setItem('python_quiz_meta', JSON.stringify(questionMeta));
+}
+
+function saveState() {
+  localStorage.setItem('python_quiz_state', JSON.stringify({
+    currentPaper: STATE.currentPaper,
+    currentIndex: STATE.currentIndex,
+  }));
+}
+
+function getMeta(id) {
+  if (!questionMeta[id]) questionMeta[id] = { done:false, starred:false };
+  return questionMeta[id];
+}
+
+// ======================================================================
+//  COMPUTED / FILTERING
+// ======================================================================
+function getFilteredQuestions() {
+  let qs = questionBank;
+  if (STATE.currentPaper > 0) {
+    qs = qs.filter(q => q.paper === STATE.currentPaper);
+  }
+  if (STATE.activeTypes.size > 0) {
+    qs = qs.filter(q => STATE.activeTypes.has(q.type));
+  }
+  // Sort by paper, then by type order, then by number
+  qs.sort((a, b) => {
+    if (a.paper !== b.paper) return a.paper - b.paper;
+    const oa = TYPE_CONFIG[a.type]?.order || 99;
+    const ob = TYPE_CONFIG[b.type]?.order || 99;
+    if (oa !== ob) return oa - ob;
+    return a.number - b.number;
+  });
+  return qs;
+}
+
+function getCurrentQuestion() {
+  const qs = getFilteredQuestions();
+  if (qs.length === 0) return null;
+  if (STATE.currentIndex >= qs.length) STATE.currentIndex = qs.length - 1;
+  if (STATE.currentIndex < 0) STATE.currentIndex = 0;
+  return qs[STATE.currentIndex];
+}
+
+// ======================================================================
+//  RENDER
+// ======================================================================
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+function renderPaperTabs() {
+  const container = $('#paperTabs');
+  const papers = ['全部'];
+  for (let i = 1; i <= 5; i++) {
+    // Count questions per paper
+    const count = questionBank.filter(q => q.paper === i).length;
+    papers.push(`试卷${'一二三四五'[i-1]}${count ? ` (${count})` : ''}`);
+  }
+  container.innerHTML = papers.map((name, i) => {
+    const active = STATE.currentPaper === i ? ' active' : '';
+    return `<button class="paper-tab${active}" data-paper="${i}">${name}</button>`;
+  }).join('');
+}
+
+function renderTypeFilters() {
+  const container = $('#typeFilters');
+  const types = Object.entries(TYPE_CONFIG).sort((a,b) => a[1].order - b[1].order);
+  container.innerHTML = types.map(([key, cfg]) => {
+    const active = STATE.activeTypes.has(key) ? ' active' : '';
+    const activeAny = STATE.activeTypes.size === 0;
+    return `<button class="type-chip${active}" data-type="${key}">${cfg.icon} ${cfg.name}</button>`;
+  }).join('');
+}
+
+function renderQuestionNav() {
+  const container = $('#questionNav');
+  const qs = getFilteredQuestions();
+  if (qs.length === 0) {
+    container.innerHTML = '<div class="sidebar-label">暂无题目</div>';
+    return;
+  }
+
+  // Group by type
+  const grouped = {};
+  qs.forEach((q, idx) => {
+    if (!grouped[q.type]) grouped[q.type] = [];
+    grouped[q.type].push({ q, idx });
+  });
+
+  const typeOrder = Object.keys(grouped).sort((a,b) =>
+    (TYPE_CONFIG[a]?.order||99) - (TYPE_CONFIG[b]?.order||99)
+  );
+
+  let html = '';
+  typeOrder.forEach(type => {
+    const cfg = TYPE_CONFIG[type] || { name: type, icon: '📝' };
+    html += `<div class="type-section">`;
+    html += `<div class="type-section-header">${cfg.icon} ${cfg.name}</div>`;
+    html += `<div class="question-grid">`;
+    grouped[type].forEach(({ q, idx }) => {
+      const meta = getMeta(q.id);
+      let cls = '';
+      if (idx === STATE.currentIndex) cls += ' current';
+      if (meta.done && meta.starred) cls += ' starred done';
+      else if (meta.done) cls += ' done';
+      else if (meta.starred) cls += ' starred';
+      html += `<button class="q-num${cls}" data-index="${idx}" title="#${q.id} ${cfg.name} ${q.number}">${q.number}</button>`;
+    });
+    html += `</div></div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderMain() {
+  const container = $('#mainContent');
+  const q = getCurrentQuestion();
+  const qs = getFilteredQuestions();
+  const total = qs.length;
+  var _aiAnswer = q ? getAiAnswer(q.id) : null;
+
+  if (!q) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📂</div>
+        <div class="empty-state-text">没有匹配的题目</div>
+        <div style="font-size:0.8rem;color:var(--text-muted)">请选择题型筛选或确认题库已导入</div>
+      </div>
+    `;
+    return;
+  }
+
+  const cfg = TYPE_CONFIG[q.type] || { name:'未知', icon:'📝' };
+  const meta = getMeta(q.id);
+  const currentNum = STATE.currentIndex + 1;
+
+  // If question has no image, show placeholder
+  const imageHtml = q.image
+    ? `<img src="${q.image}" alt="题目图片" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'q-image-placeholder\\'>图片加载失败:<br>${this.src}</div>'">`
+    : `<div class="q-image-placeholder">
+         <div style="text-align:center">
+           <div style="font-size:2.5rem;margin-bottom:8px">📷</div>
+           <div>题目图片待导入</div>
+           <div style="font-size:0.75rem;margin-top:4px">试卷${q.paper} · ${cfg.name} #${q.number}</div>
+         </div>
+       </div>`;
+
+  const showAnswer = STATE.answerRevealed;
+  var effectiveAnswer = q.answer || (_aiAnswer ? _aiAnswer.answer : '');
+  var answerSource = q.answer ? '' : (_aiAnswer ? '<span class="ai-answer-badge">🤖 AI</span>' : '');
+  var answerClass = effectiveAnswer ? 'correct-ans' : '';
+
+  container.innerHTML = `
+    <div class="q-header">
+      <div class="q-meta">
+        <span class="q-badge">试卷${'一二三四五'[q.paper-1] || q.paper} · ${cfg.name}</span>
+        ${answerSource}
+        ${meta.done ? '<span style="font-size:0.75rem;color:var(--success)">✓ 已完成</span>' : ''}
+        ${meta.starred ? '<span style="font-size:0.75rem;color:var(--warning)">⭐ 收藏</span>' : ''}
+      </div>
+      <span class="q-idx">${currentNum} / ${total}</span>
+    </div>
+    <div class="q-content">
+      <div class="q-image-wrap" id="qImageWrap" title="点击放大">
+        ${imageHtml}
+      </div>
+    </div>
+    <div class="q-answer-area">
+      <div class="answer-toggle-group">
+        <button class="answer-toggle${showAnswer ? ' revealed' : ''}" id="answerToggle">
+          ${showAnswer ? '🙈 隐藏答案' : '👁 显示答案'}
+        </button>
+      </div>
+      <div class="answer-content${showAnswer ? ' show' : ''}" id="answerContent">
+        <div class="answer-line">
+          <span class="answer-label">答案：</span>
+          <span class="answer-text ${answerClass}">${effectiveAnswer || '（未设置）'}</span>
+        </div>
+        ${_aiAnswer ? `
+        <div class="answer-line" style="font-size:0.75rem;color:var(--text-muted);">
+          🤖 由 ${_aiAnswer.model||'AI'} 解答 · ${new Date(_aiAnswer.timestamp).toLocaleString('zh-CN')}
+        </div>` : ''}
+        ${q.explanation ? `
+        <div class="answer-line">
+          <span class="answer-label">解析：</span>
+          <span class="answer-text">${q.explanation}</span>
+        </div>` : ''}
+        ${q.answerImage ? `
+        <div style="margin-top:8px">
+          <img src="${q.answerImage}" alt="答案图片" style="max-width:100%;border-radius:6px;" loading="lazy">
+        </div>` : ''}
+      </div>
+    </div>
+    <div class="action-bar">
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" ${STATE.currentIndex === 0 ? 'disabled' : ''}>
+          ← 上一题 <span class="kbd-hint">←</span>
+        </button>
+        <button class="nav-btn" id="nextBtn" ${STATE.currentIndex >= total - 1 ? 'disabled' : ''}>
+          下一题 → <span class="kbd-hint">→</span>
+        </button>
+      </div>
+      <div class="action-btns">
+        <button class="ai-btn" id="aiAnswerBtn" title="AI识图解答">
+          🤖 AI解答 <span class="kbd-hint">A</span>
+        </button>
+        <button class="action-btn${meta.starred ? ' active' : ''}" id="starBtn">
+          ${meta.starred ? '⭐' : '☆'} 收藏 <span class="kbd-hint">S</span>
+        </button>
+        <button class="action-btn${meta.done ? ' done-mark' : ''}" id="doneBtn">
+          ${meta.done ? '✅' : '☐'} 完成 <span class="kbd-hint">D</span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAll() {
+  renderPaperTabs();
+  renderTypeFilters();
+  renderQuestionNav();
+  renderMain();
+  updateProgress();
+  updateDarkMode();
+}
+
+function updateProgress() {
+  const qs = getFilteredQuestions();
+  const total = qs.length;
+  const done = qs.filter(q => getMeta(q.id).done).length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  $('#progressPct').textContent = pct + '%';
+  $('#progressFill').style.width = pct + '%';
+  $('#progressLabel').textContent = `已完成 ${done}/${total}`;
+  $('#topbarStat').innerHTML = `进度 <strong>${done}</strong>/${total}`;
+  var exportBtn = $('#exportBtn');
+  if (exportBtn) {
+    var aiCount = countAiAnswers();
+    exportBtn.style.display = aiCount > 0 ? 'block' : 'none';
+    exportBtn.textContent = '📋 导出AI答案 (' + aiCount + '条)';
+  }
+}
+
+function updateDarkMode() {
+  if (STATE.isDark) {
+    document.documentElement.classList.add('dark');
+    $('#darkToggle').textContent = '☀️';
+  } else {
+    document.documentElement.classList.remove('dark');
+    $('#darkToggle').textContent = '🌙';
+  }
+}
+
+// ======================================================================
+//  ACTIONS
+// ======================================================================
+function navigateTo(index) {
+  const qs = getFilteredQuestions();
+  if (index < 0) index = 0;
+  if (index >= qs.length) index = qs.length - 1;
+  STATE.currentIndex = index;
+  STATE.answerRevealed = false;
+  saveState();
+  renderAll();
+}
+
+function nextQuestion() {
+  const qs = getFilteredQuestions();
+  if (STATE.currentIndex < qs.length - 1) {
+    navigateTo(STATE.currentIndex + 1);
+  }
+}
+
+function prevQuestion() {
+  if (STATE.currentIndex > 0) {
+    navigateTo(STATE.currentIndex - 1);
+  }
+}
+
+function toggleAnswer() {
+  STATE.answerRevealed = !STATE.answerRevealed;
+  renderMain();
+  // Re-bind image click after re-render
+  bindImageZoom();
+}
+
+function toggleDone() {
+  const q = getCurrentQuestion();
+  if (!q) return;
+  const meta = getMeta(q.id);
+  meta.done = !meta.done;
+  saveMeta();
+  renderAll();
+}
+
+function toggleStar() {
+  const q = getCurrentQuestion();
+  if (!q) return;
+  const meta = getMeta(q.id);
+  meta.starred = !meta.starred;
+  saveMeta();
+  renderAll();
+}
+
+function toggleDarkMode() {
+  STATE.isDark = !STATE.isDark;
+  localStorage.setItem('python_quiz_dark', STATE.isDark ? '1' : '0');
+  updateDarkMode();
+}
+
+// ======================================================================
+//  IMAGE LIGHTBOX
+// ======================================================================
+function openLightbox(imgSrc) {
+  const lb = $('#lightbox');
+  lb.querySelector('img').src = imgSrc;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  $('#lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function bindImageZoom() {
+  const wrap = $('#qImageWrap');
+  if (!wrap) return;
+  wrap.onclick = function(e) {
+    const img = wrap.querySelector('img');
+    if (img && img.src) {
+      openLightbox(img.src);
+    }
+  };
+}
+
+// ======================================================================
+//  EVENT DELEGATION
+// ======================================================================
+document.addEventListener('click', function(e) {
+  // Paper tabs
+  const paperTab = e.target.closest('.paper-tab');
+  if (paperTab) {
+    STATE.currentPaper = parseInt(paperTab.dataset.paper);
+    STATE.currentIndex = 0;
+    STATE.answerRevealed = false;
+    saveState();
+    renderAll();
+    return;
+  }
+
+  // Type chips
+  const typeChip = e.target.closest('.type-chip');
+  if (typeChip) {
+    const type = typeChip.dataset.type;
+    if (STATE.activeTypes.has(type)) {
+      STATE.activeTypes.delete(type);
+    } else {
+      STATE.activeTypes.add(type);
+    }
+    STATE.currentIndex = 0;
+    STATE.answerRevealed = false;
+    renderAll();
+    return;
+  }
+
+  // Question number buttons in sidebar
+  const qNum = e.target.closest('.q-num');
+  if (qNum) {
+    const idx = parseInt(qNum.dataset.index);
+    navigateTo(idx);
+    // Close sidebar on mobile
+    if (window.innerWidth <= 768) {
+      closeSidebar();
+    }
+    return;
+  }
+
+  // Answer toggle
+  if (e.target.closest('#answerToggle')) {
+    toggleAnswer();
+    return;
+  }
+
+  // Navigation buttons
+  if (e.target.closest('#prevBtn')) { prevQuestion(); return; }
+  if (e.target.closest('#nextBtn')) { nextQuestion(); return; }
+
+  // Action buttons
+  if (e.target.closest('#starBtn')) { toggleStar(); return; }
+  if (e.target.closest('#doneBtn')) { toggleDone(); return; }
+  if (e.target.closest('#aiAnswerBtn')) {
+    var q = getCurrentQuestion();
+    if (q) answerWithAi(q.id);
+    return;
+  }
+  if (e.target.closest('#batchAiBtn')) { batchAiAnswer(); return; }
+  if (e.target.closest('#exportBtn')) { exportAiAnswers(); return; }
+
+  // Dark mode
+  if (e.target.closest('#darkToggle')) { toggleDarkMode(); return; }
+
+  // Lightbox close
+  if (e.target.closest('#lightbox') && !e.target.closest('img')) {
+    closeLightbox();
+    return;
+  }
+  if (e.target.closest('.lightbox-close')) {
+    closeLightbox();
+    return;
+  }
+
+  // Sidebar toggle (mobile)
+  if (e.target.closest('#sidebarToggle')) {
+    toggleSidebar();
+    return;
+  }
+  if (e.target.closest('#sidebarOverlay')) {
+    closeSidebar();
+    return;
+  }
+});
+
+// ======================================================================
+//  KEYBOARD SHORTCUTS
+// ======================================================================
+document.addEventListener('keydown', function(e) {
+  // Don't capture when typing in inputs
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  switch(e.key.toLowerCase()) {
+    case 'arrowright': e.preventDefault(); nextQuestion(); break;
+    case 'arrowleft':  e.preventDefault(); prevQuestion(); break;
+    case ' ':          e.preventDefault(); toggleAnswer(); break;
+    case 'd':          toggleDone(); break;
+    case 's':          toggleStar(); break;
+    case 'a':          var curQ = getCurrentQuestion(); if (curQ) answerWithAi(curQ.id); break;
+    case 'escape':     closeLightbox(); break;
+    case '1': case '2': case '3': case '4': case '5':
+      // Switch paper with number keys
+      if (!e.ctrlKey && !e.metaKey) {
+        STATE.currentPaper = parseInt(e.key);
+        STATE.currentIndex = 0;
+        STATE.answerRevealed = false;
+        saveState();
+        renderAll();
+      }
+      break;
+    case '0':
+      if (!e.ctrlKey && !e.metaKey) {
+        STATE.currentPaper = 0;
+        STATE.currentIndex = 0;
+        STATE.answerRevealed = false;
+        saveState();
+        renderAll();
+      }
+      break;
+  }
+});
+
+// ======================================================================
+//  SIDEBAR (MOBILE)
+// ======================================================================
+function toggleSidebar() {
+  $('#sidebar').classList.toggle('open');
+  $('#sidebarOverlay').classList.toggle('show');
+}
+function closeSidebar() {
+  $('#sidebar').classList.remove('open');
+  $('#sidebarOverlay').classList.remove('show');
+}
+
+// ======================================================================
+//  AI ANSWER SYSTEM
+// ======================================================================
+const AI_CACHE_KEY = 'python_quiz_ai_answers';
+
+function getApiConfig() {
+  try {
+    return JSON.parse(localStorage.getItem('python_quiz_api_config') || 'null');
+  } catch(e) { return null; }
+}
+function saveApiConfig(cfg) {
+  localStorage.setItem('python_quiz_api_config', JSON.stringify(cfg));
+}
+function getAiCache() {
+  try { return JSON.parse(localStorage.getItem(AI_CACHE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveAiCache(cache) {
+  localStorage.setItem(AI_CACHE_KEY, JSON.stringify(cache));
+}
+function hasAiAnswer(qId) {
+  const cache = getAiCache();
+  return !!cache[qId];
+}
+function getAiAnswer(qId) {
+  const cache = getAiCache();
+  return cache[qId] || null;
+}
+function clearAiCache() {
+  localStorage.removeItem(AI_CACHE_KEY);
+  renderAll();
+}
+
+function showToast(msg, type) {
+  type = type || 'info';
+  const container = $('#toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(function() {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.3s';
+    setTimeout(function() { el.remove(); }, 300);
+  }, 3000);
+}
+
+// Settings modal
+// Model options per provider
+var PROVIDER_MODELS = {
+  deepseek: [
+    { id:'deepseek-chat', name:'DeepSeek-V3 (推荐)', cost:'~￥0.001/题, 295题≈￥0.30' },
+    { id:'deepseek-reasoner', name:'DeepSeek-R1 (推理增强)', cost:'~￥0.004/题, 295题≈￥1.20' },
+  ],
+  anthropic: [
+    { id:'claude-sonnet-4-6-20250514', name:'Claude Sonnet 4.6 (性价比高)', cost:'~$0.003/题, 295题≈$0.90' },
+    { id:'claude-opus-4-7-20250514', name:'Claude Opus 4.7 (最强)', cost:'~$0.015/题, 295题≈$4.40' },
+    { id:'claude-haiku-4-5-20251001', name:'Claude Haiku 4.5 (最快)', cost:'~$0.001/题, 295题≈$0.30' },
+  ]
+};
+
+function renderModelOptions(provider) {
+  var models = PROVIDER_MODELS[provider] || [];
+  var html = models.map(function(m) {
+    return '<option value="' + m.id + '">' + m.name + '</option>';
+  }).join('');
+  $('#apiModel').innerHTML = html;
+  $('#modelLabel').textContent = provider === 'deepseek' ? '(OpenAI兼容)' : '(Anthropic)';
+}
+
+$('#apiProvider').addEventListener('change', function() {
+  renderModelOptions(this.value);
+  updateCostHint();
+});
+
+function openSettings() {
+  var cfg = getApiConfig();
+  var provider = cfg ? cfg.provider : 'deepseek';
+  if (!provider || !PROVIDER_MODELS[provider]) provider = 'deepseek';
+  $('#apiProvider').value = provider;
+  renderModelOptions(provider);
+  if (cfg) {
+    $('#apiKeyInput').value = cfg.key || '';
+    if (cfg.model && $('#apiModel').querySelector('option[value="' + cfg.model + '"]')) {
+      $('#apiModel').value = cfg.model;
+    }
+  }
+  updateApiStatus();
+  updateCostHint();
+  $('#settingsModal').style.display = 'flex';
+}
+function closeSettings() {
+  $('#settingsModal').style.display = 'none';
+}
+$('#settingsCancel').addEventListener('click', closeSettings);
+$('#settingsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeSettings();
+});
+$('#settingsSave').addEventListener('click', function() {
+  var key = $('#apiKeyInput').value.trim();
+  if (!key) { showToast('请输入 API Key', 'error'); return; }
+  saveApiConfig({
+    key: key,
+    provider: $('#apiProvider').value,
+    model: $('#apiModel').value,
+  });
+  updateApiStatus();
+  showToast('API 配置已保存', 'success');
+  closeSettings();
+});
+$('#settingsClearCache').addEventListener('click', function() {
+  if (confirm('确定要清空所有 AI 解答缓存吗？此操作不可恢复。')) {
+    clearAiCache();
+    showToast('AI 缓存已清空', 'info');
+    closeSettings();
+  }
+});
+$('#apiModel').addEventListener('change', updateCostHint);
+$('#settingsBtn').addEventListener('click', openSettings);
+
+function updateApiStatus() {
+  var cfg = getApiConfig();
+  var status = $('#apiStatus');
+  if (cfg && cfg.key) {
+    status.className = 'api-status ok';
+    status.title = 'API已配置 (' + (cfg.provider || '?') + '/' + (cfg.model || '?') + ')';
+  } else {
+    status.className = 'api-status none';
+    status.title = 'API未配置';
+  }
+}
+
+function updateCostHint() {
+  var model = $('#apiModel').value;
+  var provider = $('#apiProvider').value;
+  var models = PROVIDER_MODELS[provider] || [];
+  for (var i = 0; i < models.length; i++) {
+    if (models[i].id === model) {
+      $('#apiCostHint').textContent = '预估费用: ' + models[i].cost;
+      return;
+    }
+  }
+  $('#apiCostHint').textContent = '';
+}
+
+// Convert image to base64 (with resize for API efficiency)
+// Uses fetch+Blob when possible (avoids canvas taint on file://)
+function imageToBase64(imgSrc) {
+  // Method 1: fetch as blob (works on HTTP, avoids canvas taint)
+  return fetch(imgSrc)
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp.blob();
+    })
+    .then(function(blob) {
+      return new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function() {
+          // Got data URL, now resize via canvas (no taint from data URL)
+          var img = new Image();
+          img.onload = function() {
+            var canvas = document.createElement('canvas');
+            var maxDim = 2048;
+            var w = img.width, h = img.height;
+            if (w > maxDim || h > maxDim) {
+              var ratio = Math.min(maxDim / w, maxDim / h);
+              w = Math.round(w * ratio);
+              h = Math.round(h * ratio);
+            }
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', 0.75).split(',')[1]);
+          };
+          img.onerror = function() { reject(new Error('图片解码失败')); };
+          img.src = reader.result;
+        };
+        reader.onerror = function() { reject(new Error('文件读取失败')); };
+        reader.readAsDataURL(blob);
+      });
+    })
+    .catch(function(fetchErr) {
+      // Method 2: fallback for file:// protocol (Firefox, or Chrome with flags)
+      console.warn('fetch failed (' + fetchErr.message + '), trying direct image loading...');
+      return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.onload = function() {
+          try {
+            var canvas = document.createElement('canvas');
+            var maxDim = 2048;
+            var w = img.width, h = img.height;
+            if (w > maxDim || h > maxDim) {
+              var ratio = Math.min(maxDim / w, maxDim / h);
+              w = Math.round(w * ratio);
+              h = Math.round(h * ratio);
+            }
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', 0.75).split(',')[1]);
+          } catch(canvasErr) {
+            reject(new Error(
+              'Canvas安全限制，请用本地服务器打开：\n' +
+              '在项目目录运行: python -m http.server 8000\n' +
+              '然后打开: http://localhost:8000/Python刷题.html'
+            ));
+          }
+        };
+        img.onerror = function() { reject(new Error('图片加载失败: ' + imgSrc)); };
+        img.src = imgSrc;
+      });
+    });
+}
+
+// Build AI prompt based on question type
+function buildAiPrompt(q) {
+  var cfg = TYPE_CONFIG[q.type] || {};
+  var typeName = cfg.name || '未知题型';
+  var prompts = {
+    choice: '请仔细审阅这道Python选择题（' + typeName + '），分析每个选项，然后只返回正确答案的字母（如A、B、C、D）。不要解释，只返回字母。',
+    fill: '请仔细审阅这道Python填空题（' + typeName + '），只返回应该填入空白处的准确答案。不要解释，只返回答案内容。',
+    judge: '请仔细审阅这道Python判断题（' + typeName + '），只返回"正确"或"错误"。不要解释。',
+    debug: '请仔细审阅这道Python程序改错题（' + typeName + '），找出代码中的错误，只返回修改后的完整正确代码。不要解释。',
+    codeFill: '请仔细审阅这道Python程序填空题（' + typeName + '），只返回应该填入空白处的代码。不要解释，只返回代码。',
+    design: '请仔细审阅这道Python程序设计题（' + typeName + '），根据题目要求，只返回完整的解题代码。不要解释，只返回代码。',
+  };
+  return prompts[q.type] || '请仔细审阅这道Python' + typeName + '题，只返回正确答案。不要解释。';
+}
+
+// Call Anthropic API
+async function callAiApi(base64Image, prompt, model) {
+  var apiConfig = getApiConfig();
+  if (!apiConfig || !apiConfig.key) {
+    throw new Error('请先配置 API Key（点击右上角齿轮图标）');
+  }
+
+  var provider = apiConfig.provider || 'deepseek';
+
+  if (provider === 'deepseek') {
+    // DeepSeek: OpenAI-compatible format
+    var body = {
+      model: model || apiConfig.model || 'deepseek-chat',
+      max_tokens: 2048,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + base64Image } },
+          { type: 'text', text: prompt },
+        ],
+      }],
+    };
+
+    var resp = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiConfig.key,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!resp.ok) {
+      var errText = await resp.text();
+      try {
+        var errJson = JSON.parse(errText);
+        throw new Error(errJson.error?.message || 'API请求失败: ' + resp.status);
+      } catch(e) {
+        if (e.message && !e.message.startsWith('API')) throw e;
+        throw new Error('API请求失败 HTTP ' + resp.status);
+      }
+    }
+
+    var data = await resp.json();
+    return data.choices[0].message.content.trim();
+
+  } else {
+    // Anthropic: Claude Messages API
+    var body = {
+      model: model || apiConfig.model || 'claude-sonnet-4-6-20250514',
+      max_tokens: 2048,
+      messages: [{
+        role: 'user',
+        content: [
+          {
+            type: 'image',
+            source: {
+              type: 'base64',
+              media_type: 'image/jpeg',
+              data: base64Image,
+            },
+          },
+          { type: 'text', text: prompt },
+        ],
+      }],
+    };
+
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiConfig.key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!resp.ok) {
+      var errText = await resp.text();
+      try {
+        var errJson = JSON.parse(errText);
+        throw new Error(errJson.error?.message || 'API请求失败: ' + resp.status);
+      } catch(e) {
+        if (e.message && !e.message.startsWith('API')) throw e;
+        throw new Error('API请求失败 HTTP ' + resp.status);
+      }
+    }
+
+    var data = await resp.json();
+    return data.content[0].text.trim();
+  }
+}
+
+// Answer a single question with AI
+async function answerWithAi(qId) {
+  var q = questionBank.find(function(e) { return e.id === qId; });
+  if (!q) { showToast('题目不存在', 'error'); return null; }
+  if (!q.image) { showToast('该题目没有图片', 'error'); return null; }
+
+  // Check if already cached
+  var cached = getAiAnswer(qId);
+  if (cached) {
+    showToast('该题已有AI解答缓存', 'info');
+    return cached.answer;
+  }
+
+  var cfg = getApiConfig();
+  if (!cfg || !cfg.key) {
+    showToast('请先配置 API Key', 'error');
+    openSettings();
+    return null;
+  }
+
+  try {
+    showToast('正在AI解答 #' + qId + ' ...', 'info');
+    // Try loading image
+    var base64;
+    try {
+      base64 = await imageToBase64(q.image);
+    } catch(imgErr) {
+      showToast('图片加载失败: ' + q.image, 'error');
+      return null;
+    }
+
+    var prompt = buildAiPrompt(q);
+    var answer = await callAiApi(base64, prompt, cfg.model);
+
+    // Cache the answer
+    var cache = getAiCache();
+    cache[qId] = {
+      answer: answer,
+      model: cfg.model,
+      timestamp: Date.now(),
+      type: q.type,
+    };
+    saveAiCache(cache);
+
+    showToast('# ' + qId + ' 解答完成!', 'success');
+    renderAll();
+    return answer;
+  } catch(err) {
+    showToast('AI解答失败: ' + err.message, 'error');
+    console.error('AI error for q' + qId + ':', err);
+    return null;
+  }
+}
+
+// Batch AI answer for all unanswered questions in current view
+var batchRunning = false;
+var batchStop = false;
+async function batchAiAnswer() {
+  if (batchRunning) {
+    batchStop = true;
+    showToast('正在停止批量任务...', 'info');
+    return;
+  }
+
+  var cfg = getApiConfig();
+  if (!cfg || !cfg.key) {
+    showToast('请先配置 API Key', 'error');
+    openSettings();
+    return;
+  }
+
+  var qs = getFilteredQuestions();
+  var unanswered = qs.filter(function(q) {
+    return !q.answer && !hasAiAnswer(q.id);
+  });
+
+  if (unanswered.length === 0) {
+    showToast('当前筛选范围内所有题目都已有答案', 'success');
+    return;
+  }
+
+  if (!confirm('将为 ' + unanswered.length + ' 道题目调用AI解答，预估费用约 $' + (unanswered.length * 0.003).toFixed(2) + '。\n\n确定继续？')) {
+    return;
+  }
+
+  batchRunning = true;
+  batchStop = false;
+  var success = 0;
+  var fail = 0;
+  var total = unanswered.length;
+
+  updateBatchBtn();
+
+  for (var i = 0; i < unanswered.length; i++) {
+    if (batchStop) break;
+    var q = unanswered[i];
+    var cache = getAiCache();
+    if (cache[q.id]) { success++; continue; }
+
+    try {
+      showToast('[' + (i+1) + '/' + total + '] 解答 #' + q.id + ' ...', 'info');
+      var base64 = await imageToBase64(q.image);
+      var prompt = buildAiPrompt(q);
+      var answer = await callAiApi(base64, prompt, cfg.model);
+
+      cache[q.id] = {
+        answer: answer,
+        model: cfg.model,
+        timestamp: Date.now(),
+        type: q.type,
+      };
+      saveAiCache(cache);
+      success++;
+      renderAll();
+    } catch(err) {
+      fail++;
+      console.error('Batch error q' + q.id + ':', err);
+    }
+
+    // Small delay between requests to avoid rate limiting
+    if (i < unanswered.length - 1 && !batchStop) {
+      await new Promise(function(r) { setTimeout(r, 1200); });
+    }
+  }
+
+  batchRunning = false;
+  updateBatchBtn();
+  renderAll();
+  showToast('批量解答完成! 成功:' + success + ' 失败:' + fail, success > 0 ? 'success' : 'error');
+}
+
+function updateBatchBtn() {
+  var btn = $('#batchAiBtn');
+  if (!btn) return;
+  if (batchRunning) {
+    btn.textContent = '⏹ 停止批量';
+    btn.classList.add('loading');
+  } else {
+    btn.textContent = '🤖 批量AI解答';
+    btn.classList.remove('loading');
+  }
+}
+
+// Export AI answers as JS code
+function exportAiAnswers() {
+  var cache = getAiCache();
+  var ids = Object.keys(cache);
+  if (ids.length === 0) {
+    showToast('没有可导出的AI解答', 'error');
+    return;
+  }
+
+  var lines = [];
+  lines.push('// AI 解答导出 (' + new Date().toISOString().split('T')[0] + ', ' + ids.length + ' 条)');
+  lines.push('// 将以下代码粘贴到 questionBank 数组之后即可永久保存答案');
+  lines.push('');
+
+  ids.forEach(function(id) {
+    var entry = cache[id];
+    var answer = entry.answer.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
+    lines.push("questionBank.find(q=>q.id===" + id + ").answer = '" + answer + "';");
+    lines.push("questionBank.find(q=>q.id===" + id + ").explanation = '(AI: " + (entry.model||'') + " @ ' + new Date(" + entry.timestamp + ").toLocaleString('zh-CN') + ')';");
+  });
+
+  var code = lines.join('\n');
+
+  // Copy to clipboard
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).then(function() {
+      showToast('已复制 ' + ids.length + ' 条答案到剪贴板!', 'success');
+    }).catch(function() {
+      downloadExport(code);
+    });
+  } else {
+    downloadExport(code);
+  }
+}
+
+function downloadExport(code) {
+  var blob = new Blob([code], { type: 'text/javascript;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'ai_answers_export.js';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('已下载答案导出文件', 'success');
+}
+
+// Count AI answers
+function countAiAnswers() {
+  var cache = getAiCache();
+  return Object.keys(cache).length;
+}
+
+// ======================================================================
+//  INIT
+// ======================================================================
+function init() {
+  // Validate data: ensure all required fields
+  const validQuestions = questionBank.filter(q =>
+    q.id && q.paper && q.type && typeof q.number === 'number'
+  );
+
+  // Build initial type filter state (show all types that have data)
+  const typesWithData = new Set(validQuestions.map(q => q.type));
+  // Start with all types shown (empty set = all)
+  STATE.activeTypes.clear();
+
+  // If we have a saved index that's out of bounds, reset
+  const qs = getFilteredQuestions();
+  if (STATE.currentIndex >= qs.length) STATE.currentIndex = 0;
+
+  updateApiStatus();
+  updateCostHint();
+
+  // Show warning if opened via file:// protocol
+  if (location.protocol === 'file:') {
+    $('#fileWarning').style.display = 'block';
+    console.warn('检测到 file:// 协议，AI解答需要HTTP服务器。请访问 http://localhost:8000/Python刷题.html');
+  }
+
+  renderAll();
+  bindImageZoom();
+
+  console.log(`📚 Python 刷题题库已就绪`);
+  console.log(`   题库总数: ${questionBank.length} 题`);
+  console.log(`   试卷数: ${new Set(questionBank.map(q => q.paper)).size}`);
+  console.log(`   题型: ${[...new Set(questionBank.map(q => q.type))].map(t => TYPE_CONFIG[t]?.name || t).join(', ')}`);
+  console.log(`   AI缓存: ${countAiAnswers()} 条`);
+  console.log(`   快捷键: ← → 翻页 | 空格 显示答案 | D 标记完成 | S 收藏 | 1-5 切换试卷 | 0 全部试卷`);
+}
+
+// 注入答案和解析 - 从JSON文件加载
+async function loadAnswers() {
+  try {
+    var response = await fetch('answers_data.json');
+    if (response.ok) {
+      var answerData = await response.json();
+      if (typeof questionBank !== 'undefined') {
+        questionBank.forEach(function(q) {
+          if (answerData[q.id]) {
+            q.answer = answerData[q.id].answer;
+            q.explanation = answerData[q.id].explanation;
+          }
+        });
+        console.log('✅ 答案数据加载成功，共 ' + Object.keys(answerData).length + ' 条');
+      }
+    } else {
+      console.warn('答案文件加载失败:', response.status);
+    }
+  } catch(e) {
+    console.warn('加载答案数据失败:', e);
+  }
+}
+
+// 先加载答案，再初始化
+loadAnswers().then(function() {
+  init();
+}).catch(function() {
+  init();
+});
+</script>
+
+</body>
+</html>

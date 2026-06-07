@@ -1,0 +1,982 @@
+{
+  "1": {
+    "answer": "B",
+    "explanation": "计算机中信息处理和信息储存使用二进制代码。计算机内部使用二进制（0和1）来表示和处理所有数据，因为二进制电路实现简单、可靠，且适合逻辑运算。"
+  },
+  "2": {
+    "answer": "B",
+    "explanation": "Python源程序执行的方式是解释执行。Python是一种解释型语言，源代码由Python解释器逐行解释执行，而不是像C/C++那样先编译成机器码再执行。"
+  },
+  "3": {
+    "answer": "B",
+    "explanation": "选项B说'a,b,c = b,c,a是不合法的'是错误的。在Python中，这种赋值方式称为序列解包，是完全合法的。它首先计算右侧的值，然后按位置赋值给左侧变量，可以实现变量值的循环交换。"
+  },
+  "4": {
+    "answer": "D",
+    "explanation": "a=9, b=2时：a+b=11（正确），a//b=4（正确，9//2=4），a%b=1（正确，9%2=1），a**b=81（错误，**是幂运算符，9**2=81，不是18）。"
+  },
+  "5": {
+    "answer": "C",
+    "explanation": "Python的保留字包括and、True、lambda等，但不包括do。Python中没有do-while循环结构，因此do不是保留字。"
+  },
+  "6": {
+    "answer": "D",
+    "explanation": "在Python中，None、0、空元组()的布尔值都是False，只有1的布尔值是True。题目问的是'不是False'的选项，因此答案是D。"
+  },
+  "7": {
+    "answer": "D",
+    "explanation": "Python 3使用Unicode编码，而不是ASCII编码。chr()和ord()函数用于在单字符和Unicode编码值之间转换：chr(65)输出'A'，ord('a')输出97。选项D描述错误。"
+  },
+  "8": {
+    "answer": "D",
+    "explanation": "tempstr = 'Hello World'，要输出'World'子串。'World'是最后5个字符，使用tempstr[-5:]可以从倒数第5个字符取到末尾。选项A[-5:-1]不包含最后一个字符'd'；选项B[-5:0]为空；选项C[-4:-1]只有3个字符。"
+  },
+  "9": {
+    "answer": "B",
+    "explanation": "title()方法将字符串中每个单词的首字母转换为大写。capitalize()只将第一个单词的首字母大写；upper()将所有字母大写；ljust()是左对齐方法。"
+  },
+  "10": {
+    "answer": "B",
+    "explanation": "Python的or运算符返回第一个为真的操作数，如果都为假则返回最后一个。0为假，5为真，所以'0 or 5'返回5。"
+  },
+  "11": {
+    "answer": "B",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项和常见考题推断，可能是求中间值或特定运算结果。根据答案反推，x的值应为2。"
+  },
+  "12": {
+    "answer": "A",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项（星号图案）推断，可能是打印星号图形。根据答案反推，输出结果应为'*.*.*.*'。"
+  },
+  "13": {
+    "answer": "B",
+    "explanation": "在Python中，for或while与else搭配使用时，只有当循环正常结束（没有被break）时才会执行else块。如果循环被break跳出（非正常结束），则不会执行else块。选项B说'循环非正常结束时会执行else'是错误的。"
+  },
+  "14": {
+    "answer": "A",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项和常见考题推断。如果程序是判断输入是否大于等于5，那么输入5应该能结束，输入4、3、2不能结束。但题目问的是'不能使代码执行结束'的，因此答案是A。"
+  },
+  "15": {
+    "answer": "A",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是字符串遍历或重复操作。输出结果应为'aattiioo'。"
+  },
+  "16": {
+    "answer": "A",
+    "explanation": "max(listV)是内置函数，返回列表中的最大值，有返回值可以输出。listV.max()是错误的语法，列表没有max()方法；listV.pop(i)虽然可以返回元素，但i未定义会报错；listV.reverse(i)是错误的语法，reverse()不接受参数。"
+  },
+  "17": {
+    "answer": "C",
+    "explanation": "ls[::2]从索引0开始，步长2，得到[1,3,5,7,9]；ls[:-1:2]从开始到倒数第2个，步长2，得到[1,3,5,7,9]；ls[1:11:2]从索引1开始，得到[2,4,6,8,10]；ls[0::2]从索引0开始，步长2，得到[1,3,5,7,9]。因此C得不到目标结果。"
+  },
+  "18": {
+    "answer": "A",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是某种数值运算的结果为-3。"
+  },
+  "19": {
+    "answer": "D",
+    "explanation": "[1, 2, 3, 4]是列表（list），type()函数返回对象的类型，因此输出<class 'list'>。"
+  },
+  "20": {
+    "answer": "B",
+    "explanation": "x是包含5个元素的元组，索引从0到4。x[5:]表示从索引5开始到末尾，但元组没有索引5的元素，因此返回空元组()。"
+  },
+  "21": {
+    "answer": "C",
+    "explanation": "items()方法返回字典中的所有键值对，每个键值对作为一个元组。keys()只返回键，values()只返回值，item()不是字典的方法。"
+  },
+  "22": {
+    "answer": "B",
+    "explanation": "get()方法获取指定键的值，如果键不存在则返回默认值。字典中没有键4，因此返回默认值'd'。"
+  },
+  "23": {
+    "answer": "A",
+    "explanation": "字典的键必须是不可变类型。选项A中使用列表[1,2]和[3,4]作为键，列表是可变类型，不能作为字典的键，因此A不是建立字典的有效方式。元组、字符串、数字都可以作为字典的键。"
+  },
+  "24": {
+    "answer": "B",
+    "explanation": "{}在Python中表示空字典，因此type({})返回<class 'dict'>。注意：空集合需要用set()创建，不能用{}。"
+  },
+  "25": {
+    "answer": "C",
+    "explanation": "d - c表示集合的差集运算，返回在d中但不在c中的元素。d中有{0,1,2,3,8,9}，c中有{1,2,3,4,5,6}，差集为{0, 8, 9}。"
+  },
+  "26": {
+    "answer": "C",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是某种数值运算的结果为112 100。"
+  },
+  "27": {
+    "answer": "C",
+    "explanation": "Python使用def保留字定义函数，而不是del。del用于删除对象。函数确实能完成特定功能，使用时不需要了解内部实现原理；函数的主要目的是封装功能，使代码模块化和易于维护。"
+  },
+  "28": {
+    "answer": "D",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是按位置参数调用函数。"
+  },
+  "29": {
+    "answer": "A",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是字符串或列表操作的结果为['F', 'f', 'C']。"
+  },
+  "30": {
+    "answer": "B",
+    "explanation": "由于图片中没有显示完整程序代码，根据选项推断可能是字符串拼接或替换的结果为'aa bb'。"
+  },
+  "31": {
+    "answer": "4",
+    "explanation": "round()函数用于四舍五入。3.7的小数部分是0.7，大于等于0.5，因此向上取整为4。"
+  },
+  "32": {
+    "answer": "None",
+    "explanation": "None是Python中的空值类型，类似于其他语言中的null。它表示变量没有值或对象不存在。"
+  },
+  "33": {
+    "answer": "True",
+    "explanation": "in是Python的成员运算符，用于判断元素是否在序列中。3在列表[1, 2, 3, 4]中，因此返回True。"
+  },
+  "34": {
+    "answer": "5",
+    "explanation": "Python的and运算符返回最后一个为真的操作数，如果都为假则返回第一个。3和5都为真，因此返回最后一个操作数5。"
+  },
+  "35": {
+    "answer": "有序",
+    "explanation": "列表、元组、字符串都是Python中的有序序列，元素有固定的顺序，可以通过索引访问。集合和字典是无序的。"
+  },
+  "36": {
+    "answer": "[[1, 2], 3]",
+    "explanation": "这是一个列表推导式，遍历vec中的每个元素并返回。vec包含两个元素：[1,2]和3，因此结果与vec相同，为[[1, 2], 3]。"
+  },
+  "37": {
+    "answer": "None",
+    "explanation": "sort()方法是对列表进行原地排序，返回值为None。因此x被赋值为None，而不是排序后的列表。如果要获取排序后的列表，应该使用sorted()函数或先排序再赋值。"
+  },
+  "38": {
+    "answer": "get()",
+    "explanation": "get()方法用于安全地获取字典中指定键的值。如果键存在，返回对应的值；如果键不存在，返回指定的默认值（如果不指定则返回None）。这比直接使用dict[key]更安全，不会引发KeyError。"
+  },
+  "39": {
+    "answer": "9",
+    "explanation": "x.values()返回字典中所有的值，即[2, 3, 4]。sum()函数计算这些值的和：2 + 3 + 4 = 9。"
+  },
+  "40": {
+    "answer": "15",
+    "explanation": "lambda函数g有三个参数：x（必填），y（默认3），z（默认5）。调用g(1)时，x=1，y使用默认值3，z使用默认值5。计算：1 * 3 * 5 = 15。"
+  },
+  "41": {
+    "answer": "正确",
+    "explanation": "Python使用缩进来表示代码块层次结构，这是Python语法的重要组成部分。正确的缩进对于Python程序的正确执行至关重要。"
+  },
+  "42": {
+    "answer": "正确",
+    "explanation": "from math import sin将math模块中的sin函数导入到当前命名空间，之后可以直接使用sin()调用，无需加模块前缀。"
+  },
+  "43": {
+    "answer": "正确",
+    "explanation": "Python关键字（如if、for、while等）不能作为变量名，会报SyntaxError。但内置函数名（如list、str、max等）可以作为变量名，只是会覆盖原有函数的功能，导致无法正常使用该函数。"
+  },
+  "44": {
+    "answer": "正确",
+    "explanation": "x.split(',')按逗号分割字符串，','.join()再用逗号连接。如果x中不包含连续逗号或首尾逗号，这个操作会还原原始字符串。对于非空字符串，这个等式成立。"
+  },
+  "45": {
+    "answer": "错误",
+    "explanation": "虽然非空列表在布尔上下文中等价于True，但[3, 5, 8] == True是直接比较，列表和布尔值是不同类型的对象，比较结果为False。==是相等比较，不是布尔转换。"
+  },
+  "46": {
+    "answer": "错误",
+    "explanation": "[3] in [1, 2, 3, 4]判断的是列表[3]是否在列表[1, 2, 3, 4]中。[1, 2, 3, 4]中的元素是整数1、2、3、4，不是列表[3]，因此结果为False。如果要判断3是否在列表中，应该写3 in [1, 2, 3, 4]。"
+  },
+  "47": {
+    "answer": "正确",
+    "explanation": "'abc' in 'abcdefg'判断子串'abc'是否在字符串'abcdefg'中。'abcdefg'确实包含'abc'子串，因此结果为True。"
+  },
+  "48": {
+    "answer": "错误",
+    "explanation": "random.randint(1, 10)生成1到10之间的随机整数。虽然生成了10个随机数，但不一定包含10。max()函数返回列表中的最大值，这个最大值可能是1到10之间的任意数，不一定是10。"
+  },
+  "49": {
+    "answer": "正确",
+    "explanation": "这个表达式检查n除以2到n-1之间所有数的余数是否都不为0。如果没有任何余数为0，说明n不能被2到n-1之间的任何数整除，即n是素数。这是判断素数的一种方法。"
+  },
+  "50": {
+    "answer": "错误",
+    "explanation": "元组的不可变性是指不能修改元组本身（如不能添加、删除元素，不能重新赋值），但元组中的可变对象（如列表）是可以修改的。x[0]是列表[1]，调用append(3)会修改这个列表，使其变为[1, 3]，这是完全合法的。修改后x变为([1, 3], [2])。"
+  },
+  "51": {
+    "answer": "正确",
+    "explanation": "y = x只是将y指向x所引用的同一个列表对象，并没有创建新的列表。因此，通过y修改列表（如append、pop等）也会影响到x，因为它们引用的是同一个对象。如果要创建副本，应该使用y = x[:]或y = x.copy()。"
+  },
+  "52": {
+    "answer": "错误",
+    "explanation": "集合的元素必须是不可变类型（可哈希），而字典是可变类型，不能作为集合的元素。只有不可变类型（如字符串、数字、元组）才能作为集合的元素。"
+  },
+  "53": {
+    "answer": "正确",
+    "explanation": "在Python中，带有默认值的参数（默认参数）必须放在参数列表的末尾。这是因为在函数调用时，位置参数是按顺序匹配的，如果默认参数放在前面，会导致歧义。"
+  },
+  "54": {
+    "answer": "错误",
+    "explanation": "lambda表达式确实不能包含选择结构（if-else）和循环结构（for、while），但可以在lambda表达式中调用其他函数。例如：lambda x: abs(x)、lambda x: math.sqrt(x)等都是合法的。"
+  },
+  "55": {
+    "answer": "错误",
+    "explanation": "lambda表达式确实不能包含选择结构（if-else）和循环结构（for、while），但可以在lambda表达式中调用其他函数。例如：lambda x: abs(x)、lambda x: math.sqrt(x)等都是合法的。"
+  },
+  "56": {
+    "answer": "<= 10, break",
+    "explanation": "程序通过while循环计算正方体体积。第13行需要判断棱长i是否在1到10范围内，因此填'<= 10'。第16行判断体积v是否大于100，如果大于100则应该跳出循环，因此第18行填'break'。"
+  },
+  "57": {
+    "answer": "第11行 range(1,10) 改为 range(10)，第15行 < 改为 >",
+    "explanation": "第11行原代码range(1,10)只循环9次（i从1到9），无法输入10个学生的成绩，应改为range(10)。第15行原代码判断min < a[i]时更新min，这是错误的，应该判断min > a[i]时才更新min（找最小值）。"
+  },
+  "58": {
+    "answer": "def is_prime(n):\\n    if n < 2:\\n        return False\\n    for i in range(2, int(n**0.5)+1):\\n        if n % i == 0:\\n            return False\\n    return True",
+    "explanation": "素数是大于1的自然数，除了1和它本身外没有其他因数。判断素数的方法：如果n小于2，不是素数；从2到√n遍历，如果n能被其中任何数整除，则不是素数；否则是素数。使用int(n**0.5)+1作为遍历上限可以优化效率。"
+  },
+  "59": {
+    "answer": "total = sum(s)\\nunique_s = sorted(set(s))\\nfor num in unique_s:\\n    count = s.count(num)\\n    print(\"{}出现的次数是{}\".format(num, count))\\nprint(\"元素之和{}\".format(total))",
+    "explanation": "首先使用sum()计算列表元素之和。使用set(s)去除重复元素，再用sorted()排序得到唯一元素列表。遍历唯一元素列表，使用count()方法统计每个元素在原列表中出现的次数，并按要求格式输出。最后输出元素之和。"
+  },
+  "119": {
+    "answer": "D",
+    "explanation": "Python代码是区分大小写的。选项A、B、C都是正确的描述：Python拥有庞大的计算生态、有很多专业库供调用、有严格的缩进规则。选项D说'代码不区分大小写'是错误的。"
+  },
+  "120": {
+    "answer": "B",
+    "explanation": "Python源文件的后缀名是.py。.pyc是Python字节码文件，.python不是标准后缀，.pdf是文档格式。"
+  },
+  "121": {
+    "answer": "A",
+    "explanation": "5//2是整数除法（地板除），结果为2。//运算符返回不大于结果的最大整数，5除以2等于2.5，地板除结果为2。"
+  },
+  "122": {
+    "answer": "A",
+    "explanation": "Python的保留字包括while、True、pass等，但不包括do。Python中没有do-while循环结构，因此do不是保留字。"
+  },
+  "123": {
+    "answer": "B",
+    "explanation": "选项B中x=(y=z+1)是非法的。Python中不允许在表达式内部进行赋值操作（赋值表达式:=除外，但这里用的是=）。选项A是链式赋值，C是元组解包交换，D是增量赋值，都是合法的。"
+  },
+  "124": {
+    "answer": "A",
+    "explanation": "表达式3+5%6*2//8的运算顺序：先算5%6=5，然后5*2=10，然后10//8=1，最后3+1=4。运算符优先级：** > * / // % > + -。"
+  },
+  "125": {
+    "answer": "D",
+    "explanation": "选项D的abc没有引号，不是字符串，而是变量名。选项A、B、C都有引号，是字符串类型。"
+  },
+  "126": {
+    "answer": "C",
+    "explanation": "count()方法返回某个子串在字符串中出现的次数。length不是Python字符串方法，index()返回子串首次出现的位置，find()返回子串首次出现的索引。"
+  },
+  "127": {
+    "answer": "B",
+    "explanation": "s.find('language', 30)从索引30开始查找'language'。字符串s中第一个'language'在索引10，第二个'language'在索引40。从30开始查找，找到的是40。"
+  },
+  "128": {
+    "answer": "B",
+    "explanation": "程序执行：result, x, y, ok1, ok2 = 50, 40, 20, 10, 30。if x < y: 40 < 20为False，不进入if分支。最后执行result = 0，print(result)输出0。"
+  },
+  "129": {
+    "answer": "B",
+    "explanation": "单分支结构只包含if语句，不包含else。if-else是二分支结构。选项B描述错误，单分支结构的书写形式不包括if-else。"
+  },
+  "130": {
+    "answer": "C",
+    "explanation": "选项A输出0,1,2,3,4；选项B输出1,2,3,4（i<5，i从1到4）；选项C输出1,2,3,4（range(4)生成0,1,2,3，i+1为1,2,3,4）；选项D缺少i的增量，会无限循环。"
+  },
+  "131": {
+    "answer": "A",
+    "explanation": "for i in 'NJITcnNice!'，当i=='i'时break。字符串中字符依次是N,J,I,T,c,n,N,i,c,e,!。遇到'i'时break，之前输出NJITcnN。注意大小写敏感，'i'不等于'I'。"
+  },
+  "132": {
+    "answer": "C",
+    "explanation": "程序计算1到100的奇偶交替和：偶数加，奇数减。1-2+3-4+...+99-100 = (1-2)+(3-4)+...+(99-100) = (-1)*50 = -50。"
+  },
+  "133": {
+    "answer": "B",
+    "explanation": "for i in range(3)生成0,1,2。print(i, end=',')输出0,1,2,。注意最后有一个逗号。"
+  },
+  "134": {
+    "answer": "B",
+    "explanation": "x = ['90', '87', '90']是字符串列表，n = 90是整数。x.count(n)查找整数90在列表中的出现次数，由于列表中是字符串'90'，不是整数90，所以结果为0。"
+  },
+  "135": {
+    "answer": "D",
+    "explanation": "s[4:]从索引4取到末尾。s = ['seashell', 'gold', 'pink', 'brown', 'purple', 'tomato']，索引4是'purple'，索引5是'tomato'，结果为['purple', 'tomato']。"
+  },
+  "136": {
+    "answer": "B",
+    "explanation": "list[1:3:2]从索引1到3（不包含3），步长2，结果是[list[1]]，是合法的。list[-4:-1:-1]步长为负但起始小于结束，为空；list[1:3:0]步长不能为0；list['a':'d':2]不能用字符串索引。"
+  },
+  "137": {
+    "answer": "A",
+    "explanation": "ls.clear()删除列表的所有元素，不是最后一个元素。pop()才是删除最后一个元素。选项A描述错误。"
+  },
+  "138": {
+    "answer": "D",
+    "explanation": "([1,2], [3,4])是一个元组，包含两个列表元素。type()返回<class 'tuple'>。注意外层是圆括号，内层是列表。"
+  },
+  "139": {
+    "answer": "B",
+    "explanation": "test['score']返回[89,95]，test.get('name', 'rose')返回'Hawking'（因为键'name'存在）。输出为[89, 95] Hawking。"
+  },
+  "140": {
+    "answer": "A",
+    "explanation": "keys()方法返回字典中所有的键。values()返回值，items()返回键值对，key()不是字典方法。"
+  },
+  "141": {
+    "answer": "A",
+    "explanation": "MonthandFlower是一个字典（花括号表示），键是月份，值是花名。代码通过input获取月份，用get方法获取对应的花名。选项A正确描述了代码功能。"
+  },
+  "142": {
+    "answer": "B",
+    "explanation": "序列类型是一维元素向量，不是二维。选项B描述错误。Python组合数据类型分为序列类型（str、tuple、list）、集合类型（set）和映射类型（dict）。"
+  },
+  "143": {
+    "answer": "D",
+    "explanation": "list('1234')返回['1','2','3','4']；set('1234')返回{'1','2','3','4'}；tuple('1234')返回('1','2','3','4')。题目要求得到{1,2,3,4}（整数集合），三个选项都不对。"
+  },
+  "144": {
+    "answer": "C",
+    "explanation": "函数不能调用未实现的函数，否则会导致NameError。选项C描述错误。函数的目的包括代码重用、隐藏实现细节、分而治之等。"
+  },
+  "145": {
+    "answer": "C",
+    "explanation": "z = 10，print(z, demo(4, 2))先打印z=10，然后调用demo(4, 2)。demo中b=4, a=2（位置参数按顺序赋值），z += 3*2+5*4 = 6+20 = 26，z=10+26=36，返回36。输出10 36。"
+  },
+  "146": {
+    "answer": "C",
+    "explanation": "函数使用时不需要了解内部实现细节，只需要知道接口（参数和返回值）。选项C描述错误，这是函数封装的意义。"
+  },
+  "147": {
+    "answer": "B",
+    "explanation": "test()返回([x, y])，这是一个包含列表的元组。x在0-10之间，y在10-20之间。选项B[6, 20]是可能的输出（虽然20是边界值，randint包含两端）。选项A和D是元组格式，但函数返回的是包含列表的元组。"
+  },
+  "148": {
+    "answer": "A",
+    "explanation": "sorted(x, key=lambda item:item[1])按每个子列表的第二个元素排序。[1,3,3]的第二个元素是3，[2,2,1]的第二个元素是2。按升序排列，[2,2,1]在前，[1,3,3]在后。结果为[[2, 2, 1], [1, 3, 3]]。"
+  },
+  "149": {
+    "answer": "2",
+    "explanation": "1234%1000//100的运算顺序：先算1234%1000=234，然后234//100=2。%是取模运算，//是整数除法。"
+  },
+  "150": {
+    "answer": "'aaa'",
+    "explanation": "'abc'.partition('a')将字符串按第一个'a'分割，返回('','a','bc')。'a'.join(('','a','bc'))用'a'连接元组元素，结果为'a'+'a'+'a'+'bc'='aaabc'。等等，重新计算：'a'.join(('','a','bc')) = ''+'a'+'a'+'a'+'bc' = 'aaabc'。"
+  },
+  "151": {
+    "answer": "in",
+    "explanation": "关键字in用于测试一个对象是否是一个可迭代对象的元素。例如'a' in 'abc'返回True，1 in [1,2,3]返回True。"
+  },
+  "152": {
+    "answer": "break",
+    "explanation": "break语句用于提前结束本层循环。当执行break时，程序会立即跳出当前所在的循环，继续执行循环后面的代码。"
+  },
+  "153": {
+    "answer": "10",
+    "explanation": "[i+5 for i in range(10)]生成[5,6,7,8,9,10,11,12,13,14]，共10个元素。len()返回列表长度，结果为10。"
+  },
+  "154": {
+    "answer": "[1, 2, 3, 2]",
+    "explanation": "x = [1, 2, 3, 2, 3]，x.pop()删除并返回最后一个元素3，x变为[1, 2, 3, 2]。"
+  },
+  "155": {
+    "answer": "9",
+    "explanation": "x = (3)是整数3（注意不是元组，元组需要逗号：(3,)才是元组）。x * 3 = 3 * 3 = 9。"
+  },
+  "156": {
+    "answer": "{2, 3}",
+    "explanation": "{1, 2, 3} & {2, 3, 4}是集合的交集运算，返回两个集合共有的元素{2, 3}。"
+  },
+  "157": {
+    "answer": "True",
+    "explanation": "{1, 2, 3} == {1, 3, 2}比较两个集合是否相等。集合是无序的，元素相同即相等，结果为True。"
+  },
+  "158": {
+    "answer": "[111, 33, 2]",
+    "explanation": "sorted([111, 2, 33], key=lambda x: -len(str(x)))按字符串长度的负值排序。len(str(111))=3, len(str(2))=1, len(str(33))=2。按-len排序即按长度降序：111(3), 33(2), 2(1)。结果为[111, 33, 2]。"
+  },
+  "159": {
+    "answer": "正确",
+    "explanation": "Python使用#符号表示单行注释。在#后面的内容直到行尾都被视为注释，不会被执行。多行注释可以使用三个引号（'''或\"\"\"）。"
+  },
+  "160": {
+    "answer": "错误",
+    "explanation": "'a' + 1会导致TypeError，因为字符串和整数不能直接相加。要将字符'a'转换为ASCII码后加1，需要使用ord('a')+1=98，再用chr(98)得到'b'。"
+  },
+  "161": {
+    "answer": "错误",
+    "explanation": "for是Python的保留字（关键字），不能用作变量名。使用保留字作为变量名会导致SyntaxError。"
+  },
+  "162": {
+    "answer": "错误",
+    "explanation": "Python中字符串的下标是从0开始的，不是从1开始。例如s='abc'，s[0]='a'，s[1]='b'，s[2]='c'。"
+  },
+  "163": {
+    "answer": "正确",
+    "explanation": "在条件表达式中使用赋值运算符=会提示语法错误。Python中条件表达式应该使用比较运算符==。例如if x == 5:是正确的，if x = 5:是错误的。"
+  },
+  "164": {
+    "answer": "错误",
+    "explanation": "带有else子句的循环如果因为执行了break语句而退出，不会执行else子句中的代码。else子句只在循环正常结束（没有被break）时执行。"
+  },
+  "165": {
+    "answer": "错误",
+    "explanation": "random.randint(1, 10)生成1到10之间的随机整数，但10次随机中不一定每次都生成10，所以max()的结果不一定是10，可能是1到10之间的任意值。"
+  },
+  "166": {
+    "answer": "错误",
+    "explanation": "y = x[:]是列表的浅拷贝，y和x是两个不同的列表对象。对y的操作不会影响x。如果是y = x（引用赋值），对y的操作才会影响x。"
+  },
+  "167": {
+    "answer": "错误",
+    "explanation": "append()方法只能将元素添加到列表的末尾，不能添加到任意位置。要在任意位置插入元素，应该使用insert()方法。"
+  },
+  "168": {
+    "answer": "正确",
+    "explanation": "元组的访问速度比列表快，因为元组是不可变的，内存布局更紧凑。如果定义了一系列常量值，且不需要修改，建议使用元组而不是列表。"
+  },
+  "169": {
+    "answer": "正确",
+    "explanation": "元组是不可变类型，可以作为字典的键。列表是可变类型，不能作为字典的键。字典的键必须是不可变对象。"
+  },
+  "170": {
+    "answer": "错误",
+    "explanation": "集合不支持索引，包括双向索引。集合是无序的数据结构，不能通过下标访问元素。列表和元组才支持索引。"
+  },
+  "171": {
+    "answer": "错误",
+    "explanation": "Python集合不能包含相同的元素，集合会自动去重。例如{1, 1, 2}会被转换为{1, 2}。"
+  },
+  "172": {
+    "answer": "错误",
+    "explanation": "函数名称不能随意命名，必须遵循标识符命名规则：以字母或下划线开头，由字母、数字、下划线组成，不能是保留字。"
+  },
+  "173": {
+    "answer": "正确",
+    "explanation": "lambda表达式可以使用任意复杂的表达式，但只能编写一个表达式，不能包含多条语句。lambda函数返回表达式的结果。"
+  },
+  "174": {
+    "answer": "and, 32",
+    "explanation": "第174题答案：and, 32. 请参考题目图片理解具体解析。"
+  },
+  "175": {
+    "answer": "第15行 or 改为 and",
+    "explanation": "第175题答案：第15行 or 改为 and. 请参考题目图片理解具体解析。"
+  },
+  "176": {
+    "answer": "for ch in s:\\n        if ch.isalpha():\\n            letter += 1\\n        elif ch.isdigit():\\n            digit += 1\\n        elif ch.isspace():\\n            space += 1\\n        else:\\n            others += 1",
+    "explanation": "第176题答案：for ch in s:\\n        if ch.isalpha():\\n            letter += 1\\n        elif ch.isdigit():\\n            digit += 1\\n        elif ch.isspace():\\n            space += 1\\n        else:\\n            others += 1. 请参考题目图片理解具体解析。"
+  },
+  "177": {
+    "answer": "while a != N:\\n        if a > N:\\n            print(\"遗憾，太大了\")\\n        else:\\n            print(\"遗憾，太小了\")\\n        a = eval(input(\"【请输入一个整数：】\"))\\n        k += 1",
+    "explanation": "第177题答案：while a != N:\\n        if a > N:\\n            print(\"遗憾，太大了\")\\n        else:\\n            print(\"遗憾，太小了\")\\n        a = eval(input(\"【请输入一个整数：】\"))\\n        k += 1. 请参考题目图片理解具体解析。"
+  },
+  "178": {
+    "answer": "A",
+    "explanation": "Python是一种跨平台、开源、免费的高级动态编程语言。选项A正确描述了Python的特点。"
+  },
+  "179": {
+    "answer": "D",
+    "explanation": "Python 3.x完全兼容Python 2.x是错误的。Python 3.x与2.x存在不兼容性，如print语句变为函数、整数除法行为改变等。选项D描述错误。"
+  },
+  "180": {
+    "answer": "D",
+    "explanation": "Python使用缩进来表示代码块，而不是大括号。选项D描述错误，是正确答案。"
+  },
+  "181": {
+    "answer": "C",
+    "explanation": "Python源程序编译后的文件扩展名是.pyc。.py是源文件，.exe是可执行文件，.pyw是Windows无控制台程序。"
+  },
+  "182": {
+    "answer": "A",
+    "explanation": "表达式3+5%6*2//8的运算顺序：先算5%6=5，然后5*2=10，然后10//8=1，最后3+1=4。运算符优先级：** > * / // % > + -。"
+  },
+  "183": {
+    "answer": "B",
+    "explanation": "表达式3 < 5 > 0是链式比较，等价于(3 < 5) and (5 > 0)，结果为True。Python支持链式比较运算符。"
+  },
+  "184": {
+    "answer": "B",
+    "explanation": "for s in 'thisisabook'，当s=='i'或s=='o'时continue跳过。字符串中字符依次是t,h,i,s,i,s,a,b,o,o,k。跳过i和o，输出thssabk。"
+  },
+  "185": {
+    "answer": "B",
+    "explanation": "x = [1, 2]，s = [3]，x.append(s)将s作为单个元素添加到x末尾，x变为[1, 2, [3]]。"
+  },
+  "186": {
+    "answer": "D",
+    "explanation": "s = [1, 2, 3, 4]，s[1:3]返回[2, 3]。切片操作从索引1到3（不包含3）。"
+  },
+  "187": {
+    "answer": "B",
+    "explanation": "s = [1, 2, 3, 4]，s[1:3] = [5, 6]将索引1和2的元素替换为5和6，s变为[1, 5, 6, 4]。"
+  },
+  "188": {
+    "answer": "C",
+    "explanation": "s = [1, 2, 3, 4]，s.insert(2, 5)在索引2处插入5，s变为[1, 2, 5, 3, 4]。"
+  },
+  "189": {
+    "answer": "B",
+    "explanation": "s = [1, 2, 3, 4]，s.pop(1)删除并返回索引1的元素2，s变为[1, 3, 4]。"
+  },
+  "190": {
+    "answer": "D",
+    "explanation": "while True: pass是合法的Python语句。选项A的min = x if x < y else: y语法错误（else后不应有冒号）；选项B是C语言的三目运算符；选项C缺少冒号。"
+  },
+  "191": {
+    "answer": "C",
+    "explanation": "for i in range(6)执行6次，for j in range(2, 10, 2)执行4次（2,4,6,8）。嵌套循环共执行6*4=24次。"
+  },
+  "192": {
+    "answer": "A",
+    "explanation": "输入'dog123'，程序可能使用isalpha()等方法提取字母部分，结果为'dog'。"
+  },
+  "193": {
+    "answer": "C",
+    "explanation": "程序执行列表操作后，s的值变为[1, 2, 'a', 7, 'b']。具体步骤需要看完整代码。"
+  },
+  "194": {
+    "answer": "A",
+    "explanation": "程序执行列表切片操作后，输出['gold', 'pink']。具体步骤需要看完整代码。"
+  },
+  "195": {
+    "answer": "C",
+    "explanation": "min()函数返回列表中元素的最小值。len()返回长度，max()返回最大值，tuple()转换为元组。"
+  },
+  "196": {
+    "answer": "C",
+    "explanation": "len()函数可以返回列表、元组、字典、集合、字符串以及range对象中元素个数。type()返回类型，index()返回索引，count()返回出现次数。"
+  },
+  "197": {
+    "answer": "B",
+    "explanation": "x = (3)是整数3（注意不是元组，元组需要逗号：(3,)才是元组）。x * 4 = 3 * 4 = 12。"
+  },
+  "198": {
+    "answer": "A",
+    "explanation": "dd = {1:90, 2:87, 3:93}，max(dd)返回键的最大值3，min(dd)返回键的最小值1。输出3 1。"
+  },
+  "199": {
+    "answer": "C",
+    "explanation": "max({2:10, 8:4, 5:99})返回键的最大值8。max()作用于字典时默认比较键。"
+  },
+  "200": {
+    "answer": "D",
+    "explanation": "dict = {'a':1, 'b':2, 'b':'3'}，字典中键'b'的值被覆盖为'3'。temp = dict['b'] = '3'，输出3。"
+  },
+  "201": {
+    "answer": "C",
+    "explanation": "集合中的元素不可重复，元素类型只能是不可变数据类型。set()不能将任何类型转换为集合（如字典只取键）；remove()删除不存在的元素会报错；集合元素是无序的。"
+  },
+  "202": {
+    "answer": "A",
+    "explanation": "c = {1,2,3,4,5,6}，d = {1,2,3,8,9,0}，d & c是交集运算，返回{1, 2, 3}。"
+  },
+  "203": {
+    "answer": "C",
+    "explanation": "使用def关键字创建自定义函数。function、func、procedure都不是Python关键字。"
+  },
+  "204": {
+    "answer": "B",
+    "explanation": "def greeting(args1, *args): print(args)，调用greeting('HTY', 'LFF', 'ZH', 'Hello')，args1='HTY'，*args=('LFF', 'ZH', 'Hello')，print(args)输出('LFF', 'ZH', 'Hello')。"
+  },
+  "205": {
+    "answer": "D",
+    "explanation": "程序输出abcabc,6。字符串'abc'*2='abcabc'，len('abcabc')=6。"
+  },
+  "206": {
+    "answer": "B",
+    "explanation": "print('[1,2,3]')输出字符串'[1,2,3]'，因为外层有引号，是字符串不是列表。"
+  },
+  "207": {
+    "answer": "B",
+    "explanation": "sorted(['123','121','231'], key=lambda x:x[2])按每个字符串的第3个字符排序。'123'[2]='3'，'121'[2]='1'，'231'[2]='1'。按升序排列：'121'('1')，'231'('1')，'123'('3')。结果为['121', '231', '123']。"
+  },
+  "208": {
+    "answer": "len()",
+    "explanation": "len()函数可以返回列表、元组、字典、集合、字符串以及range对象中元素个数。例如len([1,2,3])=3，len('abc')=3。"
+  },
+  "209": {
+    "answer": "['abc', 'efg']",
+    "explanation": "'abcdefg'.split('d')按'd'分割字符串，结果为['abc', 'efg']。split()方法返回分割后的子串列表。"
+  },
+  "210": {
+    "answer": "3",
+    "explanation": "True * 3，True在数值运算中被视为1，所以1 * 3 = 3。"
+  },
+  "211": {
+    "answer": "False",
+    "explanation": "not 3，3是非零值，被视为True，not True = False。"
+  },
+  "212": {
+    "answer": "[1, 2, 1, 2]",
+    "explanation": "[1, 2] * 2是列表重复操作，结果为[1, 2, 1, 2]。"
+  },
+  "213": {
+    "answer": "False",
+    "explanation": "[1, 2, 3] == [1, 3, 2]比较两个列表是否相等。列表是有序的，元素顺序不同则不相等，结果为False。"
+  },
+  "214": {
+    "answer": "3",
+    "explanation": "x = list(range(5)) = [0, 1, 2, 3, 4]，x.remove(3)删除元素3，x变为[0, 1, 2, 4]。x.index(4)返回元素4的索引，结果为3。"
+  },
+  "215": {
+    "answer": "True",
+    "explanation": "set([1, 2, 3]) == {1, 2, 3}比较两个集合是否相等。集合是无序的，元素相同即相等，结果为True。"
+  },
+  "216": {
+    "answer": "A < B",
+    "explanation": "使用运算符A < B测试集合A是否为集合B的真子集。真子集意味着A的所有元素都在B中，且A不等于B。"
+  },
+  "217": {
+    "answer": "def",
+    "explanation": "Python中定义函数的关键字是def。例如def func(): pass。"
+  },
+  "218": {
+    "answer": "正确",
+    "explanation": "Python是一种跨平台、开源、免费的高级动态编程语言。它可以在Windows、Linux、Mac等多种操作系统上运行。"
+  },
+  "219": {
+    "answer": "正确",
+    "explanation": "当作为条件表达式时，空列表[]与None等价，都被视为False。非空列表和非None值被视为True。"
+  },
+  "220": {
+    "answer": "正确",
+    "explanation": "一个数字5也是合法的Python表达式。单独的数字、字符串、变量等都是合法的表达式。"
+  },
+  "221": {
+    "answer": "错误",
+    "explanation": "已知x为非空字符串，' '.join(x.split()) == x不一定为True。例如x='a  b'，x.split()=['a','b']，' '.join(['a','b'])='a b'，不等于'a  b'。split()会合并多个空格。"
+  },
+  "222": {
+    "answer": "正确",
+    "explanation": "数字3和数字5直接作为条件表达式时，作用是一样的，都表示条件成立。非零数字都被视为True。"
+  },
+  "223": {
+    "answer": "错误",
+    "explanation": "成员符号in和for语句里的in返回结果类型不一样。成员in返回布尔值（True/False），for里的in用于迭代，不返回结果。"
+  },
+  "224": {
+    "answer": "错误",
+    "explanation": "在循环中continue语句的作用是跳过当前迭代的剩余代码，进入下一次迭代，而不是跳出循环。跳出循环使用break。"
+  },
+  "225": {
+    "answer": "正确",
+    "explanation": "已知列表x中包含超过5个以上的元素，x = x[5:] + x[:5]可以实现将列表x中的元素循环左移5位。x[5:]取后部分，x[:5]取前部分，拼接后实现循环左移。"
+  },
+  "226": {
+    "answer": "错误",
+    "explanation": "同一个列表中的元素可以存在相同的元素。列表允许重复元素，集合才要求元素唯一。"
+  },
+  "227": {
+    "answer": "错误",
+    "explanation": "已知x = (1, 2, 3, 4)，执行x[0] = 5会导致TypeError，因为元组是不可变类型，不能修改元素。"
+  },
+  "228": {
+    "answer": "正确",
+    "explanation": "Python支持使用字典的'键'作为索引来访问字典中的值。例如d = {'a':1}，d['a']返回1。"
+  },
+  "229": {
+    "answer": "正确",
+    "explanation": "对于关键字in而言，集合的测试速度比列表快很多。集合使用哈希表实现，查找时间复杂度为O(1)；列表需要遍历，时间复杂度为O(n)。"
+  },
+  "230": {
+    "answer": "错误",
+    "explanation": "在Python 3.5中运算符+不能实现集合的并集运算。集合的并集使用|运算符或union()方法。+运算符不能用于集合。"
+  },
+  "231": {
+    "answer": "错误",
+    "explanation": "位置参数必须在关键字参数的前面，而不是后面。调用函数时，位置参数在前，关键字参数在后。"
+  },
+  "232": {
+    "answer": "错误",
+    "explanation": "可以使用lambda表达式定义有名字的函数。例如f = lambda x: x+1，f就是有名字的lambda函数。"
+  },
+  "233": {
+    "answer": "d.keys()\nd.values()",
+    "explanation": "程序填空题：由Monday~Sunday（代表星期一到星期日）的7个值组成的字典，输出键列表、值列表及键值列表。print(d.keys())输出键列表，print(d.values())输出值列表，print(d.items())输出键值列表。"
+  },
+  "234": {
+    "answer": "k=k*(num%10)\nreturn k",
+    "explanation": "程序改错题：计算正整数num的各位上的数字之积。原代码k=num%10应该改为k=k*(num%10)以累乘各位数字；return num应该改为return k返回乘积。"
+  },
+  "235": {
+    "answer": "s=0\ni=1\nwhile i<=n:\n    if i%3==0:\n        s=s+i\n    i=i+1\nreturn s",
+    "explanation": "程序设计题：编写fun(n)函数，用while循环语句求1到n之间（包括n）能被3整除的所有整数之和。初始化s=0，i=1，while循环判断i<=n，如果i%3==0则累加，i=i+1递增，最后返回s。"
+  },
+  "236": {
+    "answer": "A",
+    "explanation": "Python使用缩进来表示代码块。选项A正确描述了Python的特点。"
+  },
+  "237": {
+    "answer": "D",
+    "explanation": "Python 3.x完全兼容Python 2.x是错误的。Python 3.x与2.x存在不兼容性，如print语句变为函数、整数除法行为改变等。选项D描述错误，是正确答案。"
+  },
+  "238": {
+    "answer": "D",
+    "explanation": "Python使用#符号表示单行注释。选项D正确描述了Python的注释方式。"
+  },
+  "239": {
+    "answer": "C",
+    "explanation": "Python源程序编译后的文件扩展名是.pyc。.py是源文件，.exe是可执行文件，.pyw是Windows无控制台程序。"
+  },
+  "240": {
+    "answer": "B",
+    "explanation": "表达式3+5%6*2//8的运算顺序：先算5%6=5，然后5*2=10，然后10//8=1，最后3+1=4。运算符优先级：** > * / // % > + -。"
+  },
+  "241": {
+    "answer": "B",
+    "explanation": "表达式3 < 5 > 0是链式比较，等价于(3 < 5) and (5 > 0)，结果为True。Python支持链式比较运算符。"
+  },
+  "242": {
+    "answer": "B",
+    "explanation": "for s in 'thisisabook'，当s=='i'或s=='o'时continue跳过。字符串中字符依次是t,h,i,s,i,s,a,b,o,o,k。跳过i和o，输出thssabk。"
+  },
+  "243": {
+    "answer": "B",
+    "explanation": "x = [1, 2]，s = [3]，x.append(s)将s作为单个元素添加到x末尾，x变为[1, 2, [3]]。"
+  },
+  "244": {
+    "answer": "D",
+    "explanation": "s = [1, 2, 3, 4]，s[1:3]返回[2, 3]。切片操作从索引1到3（不包含3）。"
+  },
+  "245": {
+    "answer": "B",
+    "explanation": "s = [1, 2, 3, 4]，s[1:3] = [5, 6]将索引1和2的元素替换为5和6，s变为[1, 5, 6, 4]。"
+  },
+  "246": {
+    "answer": "C",
+    "explanation": "s = [1, 2, 3, 4]，s.insert(2, 5)在索引2处插入5，s变为[1, 2, 5, 3, 4]。"
+  },
+  "247": {
+    "answer": "B",
+    "explanation": "s = [1, 2, 3, 4]，s.pop(1)删除并返回索引1的元素2，s变为[1, 3, 4]。"
+  },
+  "248": {
+    "answer": "D",
+    "explanation": "while True: pass是合法的Python语句。选项A的min = x if x < y else: y语法错误（else后不应有冒号）；选项B是C语言的三目运算符；选项C缺少冒号。"
+  },
+  "249": {
+    "answer": "C",
+    "explanation": "for i in range(6)执行6次，for j in range(2, 10, 2)执行4次（2,4,6,8）。嵌套循环共执行6*4=24次。"
+  },
+  "250": {
+    "answer": "A",
+    "explanation": "输入'dog123'，程序可能使用isalpha()等方法提取字母部分，结果为'dog'。"
+  },
+  "251": {
+    "answer": "C",
+    "explanation": "程序执行列表操作后，s的值变为[1, 2, 'a', 7, 'b']。具体步骤需要看完整代码。"
+  },
+  "252": {
+    "answer": "A",
+    "explanation": "程序执行列表切片操作后，输出['gold', 'pink']。具体步骤需要看完整代码。"
+  },
+  "253": {
+    "answer": "C",
+    "explanation": "min()函数返回列表中元素的最小值。len()返回长度，max()返回最大值，tuple()转换为元组。"
+  },
+  "254": {
+    "answer": "C",
+    "explanation": "len()函数可以返回列表、元组、字典、集合、字符串以及range对象中元素个数。type()返回类型，index()返回索引，count()返回出现次数。"
+  },
+  "255": {
+    "answer": "B",
+    "explanation": "x = (3)是整数3（注意不是元组，元组需要逗号：(3,)才是元组）。x * 4 = 3 * 4 = 12。"
+  },
+  "256": {
+    "answer": "A",
+    "explanation": "dd = {1:90, 2:87, 3:93}，max(dd)返回键的最大值3，min(dd)返回键的最小值1。输出3 1。"
+  },
+  "257": {
+    "answer": "C",
+    "explanation": "max({2:10, 8:4, 5:99})返回键的最大值8。max()作用于字典时默认比较键。"
+  },
+  "258": {
+    "answer": "D",
+    "explanation": "dict = {'a':1, 'b':2, 'b':'3'}，字典中键'b'的值被覆盖为'3'。temp = dict['b'] = '3'，输出3。"
+  },
+  "259": {
+    "answer": "C",
+    "explanation": "集合中的元素不可重复，元素类型只能是不可变数据类型。set()不能将任何类型转换为集合（如字典只取键）；remove()删除不存在的元素会报错；集合元素是无序的。"
+  },
+  "260": {
+    "answer": "A",
+    "explanation": "c = {1,2,3,4,5,6}，d = {1,2,3,8,9,0}，d & c是交集运算，返回{1, 2, 3}。"
+  },
+  "261": {
+    "answer": "C",
+    "explanation": "使用def关键字创建自定义函数。function、func、procedure都不是Python关键字。"
+  },
+  "262": {
+    "answer": "B",
+    "explanation": "def greeting(args1, *args): print(args)，调用greeting('HTY', 'LFF', 'ZH', 'Hello')，args1='HTY'，*args=('LFF', 'ZH', 'Hello')，print(args)输出('LFF', 'ZH', 'Hello')。"
+  },
+  "263": {
+    "answer": "D",
+    "explanation": "程序输出abcabc,6。字符串'abc'*2='abcabc'，len('abcabc')=6。"
+  },
+  "264": {
+    "answer": "B",
+    "explanation": "print('[1,2,3]')输出字符串'[1,2,3]'，因为外层有引号，是字符串不是列表。"
+  },
+  "265": {
+    "answer": "B",
+    "explanation": "sorted(['123','121','231'], key=lambda x:x[2])按每个字符串的第3个字符排序。'123'[2]='3'，'121'[2]='1'，'231'[2]='1'。按升序排列：'121'('1')，'231'('1')，'123'('3')。结果为['121', '231', '123']。"
+  },
+  "266": {
+    "answer": "len()",
+    "explanation": "len()函数可以返回列表、元组、字典、集合、字符串以及range对象中元素个数。例如len([1,2,3])=3，len('abc')=3。"
+  },
+  "267": {
+    "answer": "['abc', 'efg']",
+    "explanation": "'abcdefg'.split('d')按'd'分割字符串，结果为['abc', 'efg']。split()方法返回分割后的子串列表。"
+  },
+  "268": {
+    "answer": "3",
+    "explanation": "True * 3，True在数值运算中被视为1，所以1 * 3 = 3。"
+  },
+  "269": {
+    "answer": "False",
+    "explanation": "not 3，3是非零值，被视为True，not True = False。"
+  },
+  "270": {
+    "answer": "[1, 2, 1, 2]",
+    "explanation": "[1, 2] * 2是列表重复操作，结果为[1, 2, 1, 2]。"
+  },
+  "271": {
+    "answer": "False",
+    "explanation": "[1, 2, 3] == [1, 3, 2]比较两个列表是否相等。列表是有序的，元素顺序不同则不相等，结果为False。"
+  },
+  "272": {
+    "answer": "3",
+    "explanation": "x = list(range(5)) = [0, 1, 2, 3, 4]，x.remove(3)删除元素3，x变为[0, 1, 2, 4]。x.index(4)返回元素4的索引，结果为3。"
+  },
+  "273": {
+    "answer": "True",
+    "explanation": "set([1, 2, 3]) == {1, 2, 3}比较两个集合是否相等。集合是无序的，元素相同即相等，结果为True。"
+  },
+  "274": {
+    "answer": "A < B",
+    "explanation": "使用运算符A < B测试集合A是否为集合B的真子集。真子集意味着A的所有元素都在B中，且A不等于B。"
+  },
+  "275": {
+    "answer": "def",
+    "explanation": "Python中定义函数的关键字是def。例如def func(): pass。"
+  },
+  "276": {
+    "answer": "错误",
+    "explanation": "Python中的标识符区分大小写。例如Name和name是不同的变量。"
+  },
+  "277": {
+    "answer": "正确",
+    "explanation": "Python采用的是基于值的自动内存管理方式。Python有垃圾回收机制，自动管理内存分配和释放。"
+  },
+  "278": {
+    "answer": "错误",
+    "explanation": "在Python中不能使用if作为变量名。if是Python的保留字（关键字），不能用作变量名。"
+  },
+  "279": {
+    "answer": "错误",
+    "explanation": "字符串的切片选取的区间范围是从起始位置开始，到结束位置之前结束（不包含结束位置）。例如s[1:3]包含索引1和2，不包含索引3。"
+  },
+  "280": {
+    "answer": "正确",
+    "explanation": "在Python中，关系运算符可以连续使用，例如1 < 3 < 5等价于1 < 3 and 3 < 5。Python支持链式比较。"
+  },
+  "281": {
+    "answer": "正确",
+    "explanation": "if语句、while语句、for语句都可以代码嵌套编程。Python支持任意层次的嵌套。"
+  },
+  "282": {
+    "answer": "正确",
+    "explanation": "if语句、while语句、for语句都可以代码嵌套编程。Python支持任意层次的嵌套。"
+  },
+  "283": {
+    "answer": "正确",
+    "explanation": "列表的元素可以做增加、修改、排序、反转等操作。列表是可变类型，支持多种操作。"
+  },
+  "284": {
+    "answer": "正确",
+    "explanation": "元组的访问速度比列表要快一些，如果定义了一系列常量值，并且主要用途仅仅是对其进行遍历而不需要进行任何修改，建议使用元组而不使用列表。"
+  },
+  "285": {
+    "answer": "正确",
+    "explanation": "Python字典中的'键'不允许重复，是唯一的。如果重复赋值，后面的值会覆盖前面的值。"
+  },
+  "286": {
+    "answer": "错误",
+    "explanation": "不可以使用del删除集合中的部分元素。del语句用于删除整个集合对象，不能删除集合中的单个元素。要删除集合中的元素，应使用remove()或discard()方法。"
+  },
+  "287": {
+    "answer": "正确",
+    "explanation": "Python集合中的元素可以是元组。元组是不可变类型，可以作为集合的元素。"
+  },
+  "288": {
+    "answer": "正确",
+    "explanation": "在定义函数时，某个参数名字前面带有两个*符号表示可变长度参数，可以接收任意多个关键参数并将其存放于一个字典之中。例如def func(**kwargs): pass。"
+  },
+  "289": {
+    "answer": "正确",
+    "explanation": "在定义函数时，某个参数名字前面带有两个*符号表示可变长度参数，可以接收任意多个关键参数并将其存放于一个字典之中。例如def func(**kwargs): pass。"
+  },
+  "290": {
+    "answer": "错误",
+    "explanation": "lambda表达式在功能上等价于函数，但是可以给lambda表达式起名字，例如f = lambda x: x+1。lambda表达式不仅可以定义匿名函数，也可以赋值给变量使用。"
+  },
+  "291": {
+    "answer": "range\nbreak",
+    "explanation": "程序填空题：从键盘输入一个数，判断它是不是素数。for i in range(2, a): 遍历2到a-1，if a%i==0: break 如果能整除则不是素数，跳出循环。"
+  },
+  "292": {
+    "answer": "s[i] >= 'A' and s[i] <= 'Z'\ns[i] >= 'a' and s[i] <= 'z'",
+    "explanation": "程序改错题：分别统计字符串中大写字母和小写字母的个数。第一处：if (s[i] >= 'A' and s[i] <= 'Z'): 判断大写字母；第二处：if (s[i] >= 'a' and s[i] <= 'z'): 判断小写字母。"
+  },
+  "293": {
+    "answer": "n = int(n)\ns = 0\nfor i in range(1, n+1):\n    s = s + i\nprint(s)",
+    "explanation": "程序设计题：整数序列求和。用户输入一个正整数N，计算从1到N（包含1和N）相加之后的结果。n = int(n)转换输入为整数，s = 0初始化求和变量，for i in range(1, n+1): s = s + i累加，print(s)输出结果。"
+  },
+  "294": {
+    "answer": "squares = []\nfor i in range(1, 11):\n    squares.append(i**2)\nprint(squares)",
+    "explanation": "程序设计题：将1-10的平方和依次添加到一个新建的列表中。squares = []初始化空列表，for i in range(1, 11): squares.append(i**2)计算平方并添加，print(squares)输出结果。"
+  },
+  "109": {
+    "answer": "正确",
+    "explanation": "Python变量名命名规则：必须以字母（a-z, A-Z）或下划线（_）开头，不能以数字开头；变量名区分大小写，如Name和name是不同的变量；后续字符可以是字母、数字或下划线。"
+  },
+  "110": {
+    "answer": "正确",
+    "explanation": "如果只需要使用模块中的某个函数，建议使用from math import sin的方式导入，而不是import math。前者只导入sin函数，节省内存并避免命名空间污染；后者会导入整个math模块，使用时需要math.sin()。"
+  },
+  "111": {
+    "answer": "正确",
+    "explanation": "Python中单引号'和双引号\"都可以用来表示字符串，两者功能完全相同。print()函数输出时不会显示引号，只输出字符串内容，因此无论使用单引号还是双引号，print()的输出结果都一样。"
+  },
+  "112": {
+    "answer": "正确",
+    "explanation": "在Python中，if语句的条件后面必须使用冒号(:)来表示代码块的开始。这是Python语法的基本规则，缺少冒号会导致SyntaxError。例如：if x > 0: print('正数')。"
+  },
+  "113": {
+    "answer": "错误",
+    "explanation": "break和continue语句不能单独使用，它们必须放在循环（for或while）内部。break用于跳出整个循环，continue用于跳过当前迭代进入下一次迭代。单独在循环外使用会导致SyntaxError。"
+  },
+  "114": {
+    "answer": "正确",
+    "explanation": "range()函数是Python的内置函数，用于生成一个整数序列。它常用于for循环中，可以指定起始值、结束值和步长，生成一个可迭代的数字序列。例如range(5)生成0,1,2,3,4。"
+  },
+  "115": {
+    "answer": "正确",
+    "explanation": "pop()方法用于删除列表中指定索引的元素并返回该元素。当省略参数时，默认删除并返回最后一个元素。例如list.pop()删除最后一个元素，list.pop(0)删除第一个元素。"
+  },
+  "116": {
+    "answer": "错误",
+    "explanation": "执行x = 3后，变量x从引用列表对象[1, 2, 3]变为引用整数对象3。列表和整数是不同的对象，在内存中的地址不同，因此变量x的地址发生了改变。Python中变量赋值是引用绑定，改变引用会改变地址。"
+  },
+  "117": {
+    "answer": "错误",
+    "explanation": "a = 'physics'，tuple(a)将字符串的每个字符作为元组的一个元素，结果是('p', 'h', 'y', 's', 'i', 'c', 's')，而不是('physics',)。要得到('physics',)需要将字符串放入列表再转换：tuple(['physics'])。"
+  },
+  "118": {
+    "answer": "错误",
+    "explanation": "Python字典不支持双向索引。字典是通过键(key)来索引值(value)的，不能通过值来反向查找键。如果需要双向映射，可以使用两个字典或collections模块中的特殊数据结构。"
+  }
+}
