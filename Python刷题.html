@@ -2033,18 +2033,24 @@ function init() {
 // 注入答案和解析 - 从JSON文件加载
 async function loadAnswers() {
   try {
-    var response = await fetch('answers_data.json');
+    // 添加时间戳防止缓存
+    var cacheBuster = '?t=' + new Date().getTime();
+    var response = await fetch('answers_data.json' + cacheBuster);
     if (response.ok) {
       var answerData = await response.json();
       if (typeof questionBank !== 'undefined') {
+        var matched = 0;
         questionBank.forEach(function(q) {
           var qid = String(q.id);
           if (answerData[qid]) {
             q.answer = answerData[qid].answer;
             q.explanation = answerData[qid].explanation;
+            matched++;
+          } else {
+            console.warn('题目 ' + q.id + ' 在答案数据中未找到');
           }
         });
-        console.log('✅ 答案数据加载成功，共 ' + Object.keys(answerData).length + ' 条');
+        console.log('✅ 答案数据加载成功，共 ' + Object.keys(answerData).length + ' 条，匹配题目 ' + matched + ' 道');
       }
     } else {
       console.warn('答案文件加载失败:', response.status);
