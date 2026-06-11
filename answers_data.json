@@ -360,92 +360,92 @@
     "explanation": "查看变量内存地址的Python内置函数是id()。id()函数返回对象的唯一标识符，即对象在内存中的地址。"
   },
   "91": {
-    "answer": "type",
-    "explanation": "查看变量类型的Python内置函数是type()。type()函数返回对象的类型。"
+    "answer": "'2'",
+    "explanation": "x, y, z = '123'是序列解包，字符串'123'被拆分为三个字符，y对应第二个字符'2'。注意答案是字符串'2'。"
   },
   "92": {
-    "answer": "input",
-    "explanation": "接收用户输入的Python内置函数是input()。input()函数从标准输入读取一行文本。"
+    "answer": "512",
+    "explanation": "2**3**2 = 2**(3**2) = 2**9 = 512。幂运算从右向左结合（右结合）。"
   },
   "93": {
-    "answer": "print",
-    "explanation": "输出内容到屏幕的Python内置函数是print()。print()函数将对象输出到标准输出设备。"
+    "answer": "14",
+    "explanation": "range(10, 20)生成[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]，索引4对应的值是14。"
   },
   "94": {
-    "answer": "range",
-    "explanation": "生成整数序列的Python内置函数是range()。range()函数生成一个整数序列，常用于for循环。"
+    "answer": "[1, 2, 3]",
+    "explanation": "[1, 2] + [3]是列表拼接操作，结果是[1, 2, 3]。"
   },
   "95": {
-    "answer": "len",
-    "explanation": "返回对象长度的Python内置函数是len()。len()函数返回对象（字符串、列表、元组等）的长度。"
+    "answer": "[1, 2, 3]",
+    "explanation": "x.extend([3])将列表[3]的元素添加到x末尾，x从[1, 2]变为[1, 2, 3]。"
   },
   "96": {
-    "answer": "str",
-    "explanation": "将对象转换为字符串的Python内置函数是str()。str()函数将指定对象转换为字符串类型。"
+    "answer": "[7, 5, 3]",
+    "explanation": "x.sort(reverse=True)对列表进行降序排序，[3, 7, 5]排序后为[7, 5, 3]。"
   },
   "97": {
-    "answer": "int",
-    "explanation": "将对象转换为整数的Python内置函数是int()。int()函数将指定对象转换为整数类型。"
+    "answer": "4",
+    "explanation": "x.get(3, 4)获取键3对应的值，键3不存在则返回默认值4。"
   },
   "98": {
-    "answer": "float",
-    "explanation": "将对象转换为浮点数的Python内置函数是float()。float()函数将指定对象转换为浮点数类型。"
+    "answer": "True",
+    "explanation": "x.values()返回字典的值视图，'b'是字典的值之一，所以'b' in x.values()返回True。"
   },
   "99": {
-    "answer": "list",
-    "explanation": "将对象转换为列表的Python内置函数是list()。list()函数将可迭代对象转换为列表类型。"
+    "answer": "[1, 13, 89, 237, 100]",
+    "explanation": "按数字的字符串长度排序：1(长度1), 13(长度2), 89(长度2), 237(长度3), 100(长度3)。sorted是稳定排序，相同长度保持原顺序。"
   },
   "100": {
     "answer": "错误",
-    "explanation": "Python 3.x不完全兼容Python 2.x。Python 3.x引入了许多不兼容的改动，如print成为函数、整数除法行为改变、字符串默认使用Unicode等。"
+    "explanation": "Python 3.x不完全兼容Python 2.x。Python 3.x引入了许多不兼容的改动，如print成为函数、整数除法行为改变等。"
   },
   "101": {
     "answer": "正确",
-    "explanation": "Python是一种解释型语言。Python源代码由解释器逐行解释执行，不需要预先编译成机器码。"
+    "explanation": "Python变量名必须以字母(a-z, A-Z)或下划线(_)开头，不能以数字开头，且区分大小写（name和Name是不同的变量）。"
   },
   "102": {
     "answer": "正确",
-    "explanation": "Python是区分大小写的。变量名、函数名、关键字等都区分大小写，如Name和name是不同的变量。"
+    "explanation": "如果只需要math模块中的sin()函数，建议使用from math import sin来导入。这样可以避免导入整个模块，提高代码效率和可读性。"
   },
   "103": {
-    "answer": "错误",
-    "explanation": "Python中的注释使用#符号，不是//。//在Python中是地板除运算符。多行注释使用三引号'''或'''。"
+    "answer": "正确",
+    "explanation": "在Python中，单引号和双引号都可以用来定义字符串，两者功能完全相同，print()输出的结果也一样。"
   },
   "104": {
     "answer": "正确",
-    "explanation": "Python中的变量不需要声明类型。Python是动态类型语言，变量的类型在运行时自动确定。"
+    "explanation": "Python语法规定，if条件语句后面必须使用冒号:来表示代码块的开始。"
   },
   "105": {
     "answer": "错误",
-    "explanation": "Python中的字符串是不可变的。字符串创建后不能修改，任何修改操作都会创建新的字符串对象。"
+    "explanation": "break和continue语句不能单独使用，必须在循环体内（for或while循环）使用，用于控制循环流程。"
   },
   "106": {
     "answer": "正确",
-    "explanation": "Python中的列表是可变的。列表创建后可以修改其元素、添加或删除元素。"
+    "explanation": "range()函数用于生成一个整数序列，常用于for循环中。例如range(5)生成0,1,2,3,4。"
   },
   "107": {
-    "answer": "正确",
-    "explanation": "Python中的元组是不可变的。元组创建后不能修改，类似于不可变的列表。"
+    "answer": "错误",
+    "explanation": "列表x=[1,2,3]，执行x=3后，变量x指向新的整数对象3，内存地址发生改变。整数和列表是不同的对象。"
   },
   "108": {
     "answer": "错误",
-    "explanation": "Python中的字典是无序的（Python 3.7+保持插入顺序，但这不是语言规范）。在Python 3.6及之前版本中，字典完全无序。"
+    "explanation": "tuple('physics')将字符串拆分为字符元组，结果是('p','h','y','s','i','c','s')，不是('physics')。"
   },
   "109": {
-    "answer": "正确",
-    "explanation": "Python中的集合是无序且不重复的。集合中的元素没有顺序，且每个元素只能出现一次。"
+    "answer": "错误",
+    "explanation": "Python字典只能通过键索引获取值，不能通过值反向索引获取键。字典是单向映射结构。"
   },
   "110": {
     "answer": "正确",
-    "explanation": "Python支持面向对象编程。Python中一切皆对象，支持类、继承、多态等面向对象特性。"
+    "explanation": "删除列表重复元素最简单的方法是转换为集合再转回列表：list(set(lst))。集合会自动去重，但会改变元素顺序。"
   },
   "111": {
-    "answer": "正确",
-    "explanation": "Python支持函数式编程。Python支持高阶函数、lambda表达式、map/filter/reduce等函数式编程特性。"
+    "answer": "错误",
+    "explanation": "集合是可变类型，不可哈希，不能作为字典的键。只有不可变类型（如字符串、数字、元组）才能作为字典键。"
   },
   "112": {
-    "answer": "错误",
-    "explanation": "Python中的缩进不是可选的，而是强制的。Python使用缩进来表示代码块，不正确的缩进会导致语法错误或逻辑错误。"
+    "answer": "正确",
+    "explanation": "lambda表达式创建的是匿名函数对象，属于可调用对象，可以像普通函数一样被调用执行。"
   },
   "113": {
     "answer": "正确",
@@ -457,19 +457,19 @@
   },
   "115": {
     "answer": "pro *= i 或 pro = pro * i",
-    "explanation": "第16行需要计算阶乘，pro初始值为1，每次循环乘以i，所以填pro *= i或pro = pro * i。"
+    "explanation": "第16行计算阶乘，pro初始值为1，每次循环乘以i，所以填pro *= i。第29行累加阶乘结果，填s += cal(i)或s = s + cal(i)。"
   },
   "116": {
     "answer": "第20行: k=x*x  第33行: if y==1:",
-    "explanation": "程序改错题：判断整数x是否是同构数。\n第20行错误：k=x 应改为 k=x*x（计算x的平方）\n第33行错误：if y==0: 应改为 if y==1:（因为fun函数返回1表示是同构数）"
+    "explanation": "程序改错题：判断整数x是否是同构数。第20行k=x应改为k=x*x（计算x的平方）；第33行if y==0:应改为if y==1:（因为fun函数返回1表示是同构数）。"
   },
   "117": {
     "answer": "def main():\n    weight = float(input())\n    for i in range(10):\n        earth = weight + 0.5 * (i+1)\n        moon = earth * 0.165\n        print('第'+str(i+1)+'年地球上体重增加: '+str(earth)+'kg'+'月球上体重增加: '+str(moon)+'kg')",
-    "explanation": "程序设计题：计算未来10年在地球和月球上的体重。\n思路：\n1. 读取初始体重\n2. 使用for循环遍历10年\n3. 每年地球体重 = 初始体重 + 0.5 * 年数\n4. 每年月球体重 = 地球体重 * 16.5%\n5. 按格式输出结果"
+    "explanation": "程序设计题：计算未来10年在地球和月球上的体重。思路：1.读取初始体重；2.使用for循环遍历10年；3.每年地球体重=初始体重+0.5*年数；4.每年月球体重=地球体重*16.5%；5.按格式输出结果。"
   },
   "118": {
     "answer": "def fun(year):\n    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n        return True\n    else:\n        return False",
-    "explanation": "程序设计题：编写fun(year)函数判断闰年。\n闰年条件（满足任一即可）：\n1. 能被4整除但不能被100整除\n2. 能被400整除\n代码实现：使用if语句判断上述条件，返回True或False"
+    "explanation": "程序设计题：编写fun(year)函数判断闰年。闰年条件（满足任一即可）：1.能被4整除但不能被100整除；2.能被400整除。代码实现：使用if语句判断上述条件，返回True或False。"
   },
   "119": {
     "answer": "D",
