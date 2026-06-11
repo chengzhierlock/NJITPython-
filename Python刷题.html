@@ -2038,9 +2038,10 @@ async function loadAnswers() {
       var answerData = await response.json();
       if (typeof questionBank !== 'undefined') {
         questionBank.forEach(function(q) {
-          if (answerData[q.id]) {
-            q.answer = answerData[q.id].answer;
-            q.explanation = answerData[q.id].explanation;
+          var qid = String(q.id);
+          if (answerData[qid]) {
+            q.answer = answerData[qid].answer;
+            q.explanation = answerData[qid].explanation;
           }
         });
         console.log('✅ 答案数据加载成功，共 ' + Object.keys(answerData).length + ' 条');
